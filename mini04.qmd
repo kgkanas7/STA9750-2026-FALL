@@ -1,5 +1,0 @@
----
-title: "Mini-Project 4"
-format: html
-editor: visual
----

@@ -3,8 +3,18 @@ project:
   output-dir: docs
 
 website:
-  title: "STA 9750 Portfolio"
+  title: "STA 9750 Submission Material"
+  description:
+    Course Projects for STA 9750 at Baruch College
+  site-url: "https://kgkanas7.github.io/STA9750-2026-FALL/"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
+    background: primary
+    search: false
+    
+format:
+  html:
+    theme: sandstone
+    toc: false
+
+editor:
+  mode: source

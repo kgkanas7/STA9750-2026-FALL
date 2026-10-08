@@ -9,9 +9,9 @@
   {
     "objectID": "mp01.html",
     "href": "mp01.html",
-    "title": "Mini-Project Placeholder",
+    "title": "Mini-Project #01: What We Watched",
     "section": "",
-    "text": "This is a placeholder for STA9750 Mini-Project 1. Check back soon for more!"
+    "text": "Further Analysis & Tables\n\n\n\n\nTable 1: Top Consistent ‘Staple’ Titles Across Multiple Periods\n\n\n\n\n\n\n\n\n\nTitle\nPeriods Appeared\nAverage Hours\nMinimum Hours\nStd. Deviation\n\n\n\n\nTrue Beauty: Limited Series\n6\n178,650,000\n132,200,000\n58,312,597\n\n\nPablo Escobar, el patron del mal: Season 1\n7\n136,214,286\n105,500,000\n22,860,842\n\n\nChiquititas (2013)\n7\n120,014,286\n105,000,000\n19,421,588\n\n\nStranger Things 4\n7\n207,385,714\n97,100,000\n171,675,823\n\n\nSuits (2011): Season 1\n7\n126,885,714\n80,900,000\n59,209,724\n\n\n\n\n\n\n\n\n\n\n\n\nShows vs. Movies\n\n\n\n\nTable 2: Fraction of Watch Time: Shows vs. Movies\n\n\n\n\n\n\n\n\n\nMovie\nTV Show\nNA\n\n\n\n\n2023H1\n\n\n2.9%\n69.2%\n0.279505094\n\n\n2023H2\n\n\n3.6%\n95.8%\n0.006620874\n\n\n2024H1\n\n\n3.2%\n95.7%\n0.010877099\n\n\n2024H2\n\n\n2.8%\n96.5%\n0.007599014\n\n\n2025H1\n\n\n4.2%\n95.1%\n0.007273157\n\n\n2025H2\n\n\n3.3%\n94.8%\n0.019400896\n\n\n2026H1\n\n\n3.2%\n94.8%\n0.020203515\n\n\n\n\n\n\n\n\n\n\n\n\nLive Events Vs. Pre-Recorded Content\n\n\n\n\nTable 3: Performance Comparison: Live Events vs. Pre-Taped Content\n\n\n\n\n\n\n\n\n\nFormat\nTotal Offerings\nAverage Viewership (Hrs)\nTop Tier Viewership (Hrs)\n\n\n\n\nLive Event\n310\n3,560,000\n235,700,000\n\n\nPre-Taped\n61582\n8,289,547\n964,100,000"
   },
   {
     "objectID": "mp02.html",
@@ -33,5 +33,12 @@
     "title": "Mini-Project Placeholder",
     "section": "",
     "text": "This is a placeholder for STA9750 Mini-Project 4. Check back soon for more!"
+  },
+  {
+    "objectID": "mp01.html#footnotes",
+    "href": "mp01.html#footnotes",
+    "title": "Mini-Project Placeholder",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n:ascii:↩︎"
   }
 ]

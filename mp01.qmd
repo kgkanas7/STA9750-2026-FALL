@@ -1,5 +1,194 @@
 ---
-title: "Mini-Project Placeholder"
+title: "Mini-Project #01: What We Watched"
+author: "Konstantinos Gkanas" 
+class: STA 9750 - Software Tools for Data Analysis
+format:
+  html:
+    theme: darkly
+    css: styles.css
+    toc: true
 ---
 
-This is a placeholder for STA9750 Mini-Project 1. Check back soon for more!
+```{css, echo=FALSE}
+/* Netflix Red Accent Styling */
+body {
+    background-color: #141414 !important;
+    color: #ffffff !important;
+}
+
+a {
+    color: #E50914 !important;
+}
+
+h1, h2, h3 {
+    color: #ffffff !important;
+    border-bottom: 2px solid #E50914;
+    padding-bottom: 5px;
+}
+
+.callout.callout-note {
+    background-color: #1f1f1f !important;
+    border-left: 5px solid #E50914 !important;
+}
+---
+
+# Data Acquisition & Cleaning
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+library(rvest)
+library(readxl)
+library(fs)
+library(gt)
+
+load_netflix_data <- function(){
+  data_dir <- path("data", "mp01")
+  
+  if(!dir_exists(data_dir)){
+    dir_create(data_dir, showWarnings=FALSE, recurse=TRUE)
+  }
+  
+  NETFLIX_URLS <- list(
+    `2023H1` = "https://about.netflix.com/news/what-we-watched-a-netflix-engagement-report",
+    `2023H2` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2023",
+    `2024H1` = "https://about.netflix.com/news/what-we-watched-the-first-half-of-2024",
+    `2024H2` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2024",
+    `2025H1` = "https://about.netflix.com/news/what-we-watched-the-first-half-of-2025",
+    `2025H2` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2025",
+    `2026H1` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2026"
+  )
+  
+  download_if_needed <- function(url, local){
+    if(!file_exists(local)){
+      download.file(url, local, quiet = TRUE, mode = "wb")
+    }
+    return(local)
+  }
+  
+  NETFLIX_URLS |> 
+    map(read_html) |> 
+    map(html_element, xpath = "//a[contains(@href, '.xlsx')]") |> 
+    map_chr(html_attr, "href") |> 
+    enframe("period", "url") |>
+    mutate(path = path(data_dir, paste0(period, ".xlsx")), 
+           path = map2(url, path, download_if_needed), 
+           data = map(path, read_excel, skip=3, na="*"), 
+           data = map(data, \(x) x |> mutate(`Release Date` = as.Date(`Release Date`)))) |>
+    unnest(data) |> 
+    select(-url, -path) |> 
+    mutate(year=str_sub(period, 1, 4), 
+           half=str_sub(period, start=6), 
+           period_start = make_date(year, if_else(half==1, 1, 7), 1), 
+           period_end = make_date(year, if_else(half==1, 6, 12), if_else(half==1, 30, 31))) |> 
+    filter(!is.na(`Hours Viewed`)) |> 
+    mutate(live_event = !is.na(Runtime) & str_detect(Runtime, "\\d+:\\d+\\*"), 
+           clean_time = str_remove(Runtime, fixed("*")),
+           Runtime = 60 * hour(hm(clean_time)) + minute(hm(clean_time))) |> 
+    select(-clean_time) |> 
+    mutate(Runtime = coalesce(Runtime, mean(Runtime, na.rm=TRUE)), 
+           .by=Title, 
+           Title = stringi::stri_trans_general(Title, "Latin-ASCII"),
+           Title = str_remove(Title, " // .*"), 
+           Title = str_remove(Title, "[^[:ascii:]].*"), 
+           Title = str_trim(Title)) |> 
+    filter_out(Title == "") |> 
+    rename(
+      title = Title,
+      runtime = Runtime,
+      views = Views,
+      hours_viewed = `Hours Viewed`,
+      release_date = `Release Date`,
+      available_globally = `Available Globally?`
+    ) |>
+    mutate(
+      year = as.integer(year),
+      available_globally = (available_globally == "Yes")
+    ) |>
+    select(year, period, period_start, period_end, title, runtime, views, 
+           hours_viewed, release_date, available_globally, live_event)
+}
+
+NETFLIX_DATA <- load_netflix_data()
+```
+
+# Further Analysis & Tables 
+```{r}
+#| label: tbl-consistent-staples
+#| tbl-cap: "Top Consistent 'Staple' Titles Across Multiple Periods"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  group_by(title) |>
+  summarize(
+    appearances = n(),
+    avg_hours = mean(hours_viewed, na.rm = TRUE),
+    min_hours = min(hours_viewed, na.rm = TRUE),
+    sd_hours = sd(hours_viewed, na.rm = TRUE)
+  ) |>
+  filter(appearances >= 5) |> 
+  arrange(desc(min_hours)) |>
+  slice_head(n = 5) |>
+  gt() |>
+  fmt_number(columns = c(avg_hours, min_hours, sd_hours), decimals = 0) |>
+  cols_label(
+    title = "Title",
+    appearances = "Periods Appeared",
+    avg_hours = "Average Hours",
+    min_hours = "Minimum Hours",
+    sd_hours = "Std. Deviation"
+  )
+```
+
+# Shows vs. Movies 
+```{r}
+#| label: tbl-shows-vs-movies
+#| tbl-cap: "Fraction of Watch Time: Shows vs. Movies"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  mutate(
+    content_type = if_else(runtime > 240 | str_detect(title, "(?i)Season"), "TV Show", "Movie")
+  ) |>
+  group_by(period, content_type) |>
+  summarize(total_hours = sum(hours_viewed, na.rm = TRUE), .groups = "drop") |>
+  group_by(period) |>
+  mutate(fraction = total_hours / sum(total_hours)) |>
+  select(period, content_type, fraction) |>
+  pivot_wider(names_from = content_type, values_from = fraction) |>
+  gt() |>
+  fmt_percent(columns = c(`TV Show`, Movie), decimals = 1) |>
+  cols_label(period = "Period")
+```
+
+# Live Events Vs. Pre-Recorded Content
+```{r}
+#| label: tbl-live-vs-taped
+#| tbl-cap: "Performance Comparison: Live Events vs. Pre-Taped Content"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  mutate(content_format = if_else(live_event, "Live Event", "Pre-Taped")) |>
+  group_by(content_format) |>
+  summarize(
+    total_titles = n(),
+    avg_hours = mean(hours_viewed, na.rm = TRUE),
+    max_hours = max(hours_viewed, na.rm = TRUE)
+  ) |>
+  gt() |>
+  fmt_number(columns = c(avg_hours, max_hours), decimals = 0) |>
+  cols_label(
+    content_format = "Format",
+    total_titles = "Total Offerings",
+    avg_hours = "Average Viewership (Hrs)",
+    max_hours = "Top Tier Viewership (Hrs)"
+  )
+```

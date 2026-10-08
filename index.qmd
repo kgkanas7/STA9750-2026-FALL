@@ -1,5 +1,5 @@
 ---
-title: "- [Mini-Project #01: What We Watched](mp01.html)"
+title: "STA 9750 Mini Project #00"
 ---
 
 My name is Konstantinos Gkanas and this my portfolio for STA 9750.

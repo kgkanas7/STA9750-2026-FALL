@@ -27,6 +27,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -126,9 +161,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#further-analysis-tables" id="toc-further-analysis-tables" class="nav-link active" data-scroll-target="#further-analysis-tables">Further Analysis &amp; Tables</a></li>
+  <li><a href="#data-acquisition-cleaning" id="toc-data-acquisition-cleaning" class="nav-link active" data-scroll-target="#data-acquisition-cleaning">Data Acquisition &amp; Cleaning</a></li>
+  <li><a href="#further-analysis-tables" id="toc-further-analysis-tables" class="nav-link" data-scroll-target="#further-analysis-tables">Further Analysis &amp; Tables</a></li>
   <li><a href="#shows-vs.-movies" id="toc-shows-vs.-movies" class="nav-link" data-scroll-target="#shows-vs.-movies">Shows vs.&nbsp;Movies</a></li>
-  <li><a href="#live-events-vs.-pre-recorded-content" id="toc-live-events-vs.-pre-recorded-content" class="nav-link" data-scroll-target="#live-events-vs.-pre-recorded-content">Live Events Vs. Pre-Recorded Content</a></li>
+  <li><a href="#live-events-vs.-pre-recorded-content" id="toc-live-events-vs.-pre-recorded-content" class="nav-link" data-scroll-target="#live-events-vs.-pre-recorded-content">Live Events Vs. Pre-Recorded Content</a>
+  <ul class="collapse">
+  <li><a href="#initial-data-exploration" id="toc-initial-data-exploration" class="nav-link" data-scroll-target="#initial-data-exploration">Initial Data Exploration</a></li>
+  </ul></li>
+  <li><a href="#exploratory-questions-inline-values" id="toc-exploratory-questions-inline-values" class="nav-link" data-scroll-target="#exploratory-questions-inline-values">Exploratory Questions (Inline Values)</a></li>
+  <li><a href="#additional-exploratory-tables-task-6-q1-q2" id="toc-additional-exploratory-tables-task-6-q1-q2" class="nav-link" data-scroll-target="#additional-exploratory-tables-task-6-q1-q2">Additional Exploratory Tables (Task 6 Q1 &amp; Q2)</a>
+  <ul class="collapse">
+  <li><a href="#top-title-in-each-reporting-period" id="toc-top-title-in-each-reporting-period" class="nav-link" data-scroll-target="#top-title-in-each-reporting-period">Top Title in Each Reporting Period</a></li>
+  <li><a href="#evolution-of-netflix-catalog-size-over-time" id="toc-evolution-of-netflix-catalog-size-over-time" class="nav-link" data-scroll-target="#evolution-of-netflix-catalog-size-over-time">Evolution of Netflix Catalog Size Over Time</a></li>
+  </ul></li>
+  <li><a href="#platform-strategy-memo" id="toc-platform-strategy-memo" class="nav-link" data-scroll-target="#platform-strategy-memo">Platform Strategy Memo</a></li>
   </ul>
 </nav>
     </div>
@@ -182,11 +228,11 @@ h1, h2, h3 {
     background-color: #1f1f1f !important;
     border-left: 5px solid #E50914 !important;
 }
----
-
-# Data Acquisition & Cleaning
 </style>
 </div>
+<section id="data-acquisition-cleaning" class="level1">
+<h1>Data Acquisition &amp; Cleaning</h1>
+</section>
 <section id="further-analysis-tables" class="level1">
 <h1>Further Analysis &amp; Tables</h1>
 <div class="cell">
@@ -197,23 +243,23 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
 </figcaption>
 <div aria-describedby="tbl-consistent-staples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tpugglwrjv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tpugglwrjv table {
+<div id="sexqmcbnwd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sexqmcbnwd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tpugglwrjv thead, #tpugglwrjv tbody, #tpugglwrjv tfoot, #tpugglwrjv tr, #tpugglwrjv td, #tpugglwrjv th {
+#sexqmcbnwd thead, #sexqmcbnwd tbody, #sexqmcbnwd tfoot, #sexqmcbnwd tr, #sexqmcbnwd td, #sexqmcbnwd th {
   border-style: none;
 }
 
-#tpugglwrjv p {
+#sexqmcbnwd p {
   margin: 0;
   padding: 0;
 }
 
-#tpugglwrjv .gt_table {
+#sexqmcbnwd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -239,12 +285,12 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-left-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_caption {
+#sexqmcbnwd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tpugglwrjv .gt_title {
+#sexqmcbnwd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -256,7 +302,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-width: 0;
 }
 
-#tpugglwrjv .gt_subtitle {
+#sexqmcbnwd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -268,7 +314,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-top-width: 0;
 }
 
-#tpugglwrjv .gt_heading {
+#sexqmcbnwd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -280,13 +326,13 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_bottom_border {
+#sexqmcbnwd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_col_headings {
+#sexqmcbnwd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -301,7 +347,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_col_heading {
+#sexqmcbnwd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -321,7 +367,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   overflow-x: hidden;
 }
 
-#tpugglwrjv .gt_column_spanner_outer {
+#sexqmcbnwd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -333,15 +379,15 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 4px;
 }
 
-#tpugglwrjv .gt_column_spanner_outer:first-child {
+#sexqmcbnwd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tpugglwrjv .gt_column_spanner_outer:last-child {
+#sexqmcbnwd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tpugglwrjv .gt_column_spanner {
+#sexqmcbnwd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -353,11 +399,11 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   width: 100%;
 }
 
-#tpugglwrjv .gt_spanner_row {
+#sexqmcbnwd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tpugglwrjv .gt_group_heading {
+#sexqmcbnwd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -383,7 +429,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   text-align: left;
 }
 
-#tpugglwrjv .gt_empty_group_heading {
+#sexqmcbnwd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -398,15 +444,15 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   vertical-align: middle;
 }
 
-#tpugglwrjv .gt_from_md > :first-child {
+#sexqmcbnwd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tpugglwrjv .gt_from_md > :last-child {
+#sexqmcbnwd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tpugglwrjv .gt_row {
+#sexqmcbnwd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -425,7 +471,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   overflow-x: hidden;
 }
 
-#tpugglwrjv .gt_stub {
+#sexqmcbnwd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -438,7 +484,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#tpugglwrjv .gt_stub_row_group {
+#sexqmcbnwd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -452,15 +498,15 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   vertical-align: top;
 }
 
-#tpugglwrjv .gt_row_group_first td {
+#sexqmcbnwd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tpugglwrjv .gt_row_group_first th {
+#sexqmcbnwd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tpugglwrjv .gt_summary_row {
+#sexqmcbnwd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -470,16 +516,16 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#tpugglwrjv .gt_first_summary_row {
+#sexqmcbnwd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_first_summary_row.thick {
+#sexqmcbnwd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tpugglwrjv .gt_last_summary_row {
+#sexqmcbnwd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,7 +535,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_grand_summary_row {
+#sexqmcbnwd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -499,7 +545,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#tpugglwrjv .gt_first_grand_summary_row {
+#sexqmcbnwd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,7 +555,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-top-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_last_grand_summary_row_top {
+#sexqmcbnwd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -519,11 +565,11 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_striped {
+#sexqmcbnwd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tpugglwrjv .gt_table_body {
+#sexqmcbnwd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -532,7 +578,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_footnotes {
+#sexqmcbnwd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -546,7 +592,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_footnote {
+#sexqmcbnwd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -555,7 +601,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#tpugglwrjv .gt_sourcenotes {
+#sexqmcbnwd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -569,7 +615,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#tpugglwrjv .gt_sourcenote {
+#sexqmcbnwd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -577,72 +623,72 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#tpugglwrjv .gt_left {
+#sexqmcbnwd .gt_left {
   text-align: left;
 }
 
-#tpugglwrjv .gt_center {
+#sexqmcbnwd .gt_center {
   text-align: center;
 }
 
-#tpugglwrjv .gt_right {
+#sexqmcbnwd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tpugglwrjv .gt_font_normal {
+#sexqmcbnwd .gt_font_normal {
   font-weight: normal;
 }
 
-#tpugglwrjv .gt_font_bold {
+#sexqmcbnwd .gt_font_bold {
   font-weight: bold;
 }
 
-#tpugglwrjv .gt_font_italic {
+#sexqmcbnwd .gt_font_italic {
   font-style: italic;
 }
 
-#tpugglwrjv .gt_super {
+#sexqmcbnwd .gt_super {
   font-size: 65%;
 }
 
-#tpugglwrjv .gt_footnote_marks {
+#sexqmcbnwd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tpugglwrjv .gt_asterisk {
+#sexqmcbnwd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tpugglwrjv .gt_indent_1 {
+#sexqmcbnwd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tpugglwrjv .gt_indent_2 {
+#sexqmcbnwd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tpugglwrjv .gt_indent_3 {
+#sexqmcbnwd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tpugglwrjv .gt_indent_4 {
+#sexqmcbnwd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tpugglwrjv .gt_indent_5 {
+#sexqmcbnwd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tpugglwrjv .katex-display {
+#sexqmcbnwd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tpugglwrjv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sexqmcbnwd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -713,23 +759,23 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
 </figcaption>
 <div aria-describedby="tbl-shows-vs-movies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fgyizmwgrz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fgyizmwgrz table {
+<div id="uoxwraviao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uoxwraviao table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fgyizmwgrz thead, #fgyizmwgrz tbody, #fgyizmwgrz tfoot, #fgyizmwgrz tr, #fgyizmwgrz td, #fgyizmwgrz th {
+#uoxwraviao thead, #uoxwraviao tbody, #uoxwraviao tfoot, #uoxwraviao tr, #uoxwraviao td, #uoxwraviao th {
   border-style: none;
 }
 
-#fgyizmwgrz p {
+#uoxwraviao p {
   margin: 0;
   padding: 0;
 }
 
-#fgyizmwgrz .gt_table {
+#uoxwraviao .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -755,12 +801,12 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-left-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_caption {
+#uoxwraviao .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fgyizmwgrz .gt_title {
+#uoxwraviao .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -772,7 +818,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-width: 0;
 }
 
-#fgyizmwgrz .gt_subtitle {
+#uoxwraviao .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -784,7 +830,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-top-width: 0;
 }
 
-#fgyizmwgrz .gt_heading {
+#uoxwraviao .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -796,13 +842,13 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_bottom_border {
+#uoxwraviao .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_col_headings {
+#uoxwraviao .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -817,7 +863,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_col_heading {
+#uoxwraviao .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,7 +883,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   overflow-x: hidden;
 }
 
-#fgyizmwgrz .gt_column_spanner_outer {
+#uoxwraviao .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -849,15 +895,15 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 4px;
 }
 
-#fgyizmwgrz .gt_column_spanner_outer:first-child {
+#uoxwraviao .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fgyizmwgrz .gt_column_spanner_outer:last-child {
+#uoxwraviao .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fgyizmwgrz .gt_column_spanner {
+#uoxwraviao .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -869,11 +915,11 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   width: 100%;
 }
 
-#fgyizmwgrz .gt_spanner_row {
+#uoxwraviao .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fgyizmwgrz .gt_group_heading {
+#uoxwraviao .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -899,7 +945,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   text-align: left;
 }
 
-#fgyizmwgrz .gt_empty_group_heading {
+#uoxwraviao .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -914,15 +960,15 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   vertical-align: middle;
 }
 
-#fgyizmwgrz .gt_from_md > :first-child {
+#uoxwraviao .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fgyizmwgrz .gt_from_md > :last-child {
+#uoxwraviao .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fgyizmwgrz .gt_row {
+#uoxwraviao .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -941,7 +987,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   overflow-x: hidden;
 }
 
-#fgyizmwgrz .gt_stub {
+#uoxwraviao .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -954,7 +1000,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#fgyizmwgrz .gt_stub_row_group {
+#uoxwraviao .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -968,15 +1014,15 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   vertical-align: top;
 }
 
-#fgyizmwgrz .gt_row_group_first td {
+#uoxwraviao .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fgyizmwgrz .gt_row_group_first th {
+#uoxwraviao .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fgyizmwgrz .gt_summary_row {
+#uoxwraviao .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -986,16 +1032,16 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#fgyizmwgrz .gt_first_summary_row {
+#uoxwraviao .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_first_summary_row.thick {
+#uoxwraviao .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fgyizmwgrz .gt_last_summary_row {
+#uoxwraviao .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1005,7 +1051,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_grand_summary_row {
+#uoxwraviao .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1015,7 +1061,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#fgyizmwgrz .gt_first_grand_summary_row {
+#uoxwraviao .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1025,7 +1071,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-top-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_last_grand_summary_row_top {
+#uoxwraviao .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1035,11 +1081,11 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_striped {
+#uoxwraviao .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fgyizmwgrz .gt_table_body {
+#uoxwraviao .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1048,7 +1094,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_footnotes {
+#uoxwraviao .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1062,7 +1108,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_footnote {
+#uoxwraviao .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1071,7 +1117,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#fgyizmwgrz .gt_sourcenotes {
+#uoxwraviao .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1085,7 +1131,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#fgyizmwgrz .gt_sourcenote {
+#uoxwraviao .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1093,72 +1139,72 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#fgyizmwgrz .gt_left {
+#uoxwraviao .gt_left {
   text-align: left;
 }
 
-#fgyizmwgrz .gt_center {
+#uoxwraviao .gt_center {
   text-align: center;
 }
 
-#fgyizmwgrz .gt_right {
+#uoxwraviao .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fgyizmwgrz .gt_font_normal {
+#uoxwraviao .gt_font_normal {
   font-weight: normal;
 }
 
-#fgyizmwgrz .gt_font_bold {
+#uoxwraviao .gt_font_bold {
   font-weight: bold;
 }
 
-#fgyizmwgrz .gt_font_italic {
+#uoxwraviao .gt_font_italic {
   font-style: italic;
 }
 
-#fgyizmwgrz .gt_super {
+#uoxwraviao .gt_super {
   font-size: 65%;
 }
 
-#fgyizmwgrz .gt_footnote_marks {
+#uoxwraviao .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fgyizmwgrz .gt_asterisk {
+#uoxwraviao .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fgyizmwgrz .gt_indent_1 {
+#uoxwraviao .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fgyizmwgrz .gt_indent_2 {
+#uoxwraviao .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fgyizmwgrz .gt_indent_3 {
+#uoxwraviao .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fgyizmwgrz .gt_indent_4 {
+#uoxwraviao .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fgyizmwgrz .gt_indent_5 {
+#uoxwraviao .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fgyizmwgrz .katex-display {
+#uoxwraviao .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fgyizmwgrz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#uoxwraviao div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1248,23 +1294,23 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
 </figcaption>
 <div aria-describedby="tbl-live-vs-taped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="svqsukaebd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#svqsukaebd table {
+<div id="ifquhmrexq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ifquhmrexq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#svqsukaebd thead, #svqsukaebd tbody, #svqsukaebd tfoot, #svqsukaebd tr, #svqsukaebd td, #svqsukaebd th {
+#ifquhmrexq thead, #ifquhmrexq tbody, #ifquhmrexq tfoot, #ifquhmrexq tr, #ifquhmrexq td, #ifquhmrexq th {
   border-style: none;
 }
 
-#svqsukaebd p {
+#ifquhmrexq p {
   margin: 0;
   padding: 0;
 }
 
-#svqsukaebd .gt_table {
+#ifquhmrexq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1290,12 +1336,12 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-left-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_caption {
+#ifquhmrexq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#svqsukaebd .gt_title {
+#ifquhmrexq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1307,7 +1353,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-width: 0;
 }
 
-#svqsukaebd .gt_subtitle {
+#ifquhmrexq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1319,7 +1365,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-top-width: 0;
 }
 
-#svqsukaebd .gt_heading {
+#ifquhmrexq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1331,13 +1377,13 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_bottom_border {
+#ifquhmrexq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_col_headings {
+#ifquhmrexq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1352,7 +1398,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_col_heading {
+#ifquhmrexq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1372,7 +1418,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   overflow-x: hidden;
 }
 
-#svqsukaebd .gt_column_spanner_outer {
+#ifquhmrexq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1384,15 +1430,15 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 4px;
 }
 
-#svqsukaebd .gt_column_spanner_outer:first-child {
+#ifquhmrexq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#svqsukaebd .gt_column_spanner_outer:last-child {
+#ifquhmrexq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#svqsukaebd .gt_column_spanner {
+#ifquhmrexq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1404,11 +1450,11 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   width: 100%;
 }
 
-#svqsukaebd .gt_spanner_row {
+#ifquhmrexq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#svqsukaebd .gt_group_heading {
+#ifquhmrexq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1434,7 +1480,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   text-align: left;
 }
 
-#svqsukaebd .gt_empty_group_heading {
+#ifquhmrexq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1449,15 +1495,15 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   vertical-align: middle;
 }
 
-#svqsukaebd .gt_from_md > :first-child {
+#ifquhmrexq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#svqsukaebd .gt_from_md > :last-child {
+#ifquhmrexq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#svqsukaebd .gt_row {
+#ifquhmrexq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1476,7 +1522,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   overflow-x: hidden;
 }
 
-#svqsukaebd .gt_stub {
+#ifquhmrexq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1489,7 +1535,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#svqsukaebd .gt_stub_row_group {
+#ifquhmrexq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1503,15 +1549,15 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   vertical-align: top;
 }
 
-#svqsukaebd .gt_row_group_first td {
+#ifquhmrexq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#svqsukaebd .gt_row_group_first th {
+#ifquhmrexq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#svqsukaebd .gt_summary_row {
+#ifquhmrexq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1521,16 +1567,16 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#svqsukaebd .gt_first_summary_row {
+#ifquhmrexq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_first_summary_row.thick {
+#ifquhmrexq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#svqsukaebd .gt_last_summary_row {
+#ifquhmrexq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1540,7 +1586,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_grand_summary_row {
+#ifquhmrexq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1550,7 +1596,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#svqsukaebd .gt_first_grand_summary_row {
+#ifquhmrexq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1560,7 +1606,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-top-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_last_grand_summary_row_top {
+#ifquhmrexq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1570,11 +1616,11 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_striped {
+#ifquhmrexq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#svqsukaebd .gt_table_body {
+#ifquhmrexq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1583,7 +1629,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_footnotes {
+#ifquhmrexq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1597,7 +1643,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_footnote {
+#ifquhmrexq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1606,7 +1652,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#svqsukaebd .gt_sourcenotes {
+#ifquhmrexq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1620,7 +1666,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#svqsukaebd .gt_sourcenote {
+#ifquhmrexq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1628,72 +1674,72 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#svqsukaebd .gt_left {
+#ifquhmrexq .gt_left {
   text-align: left;
 }
 
-#svqsukaebd .gt_center {
+#ifquhmrexq .gt_center {
   text-align: center;
 }
 
-#svqsukaebd .gt_right {
+#ifquhmrexq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#svqsukaebd .gt_font_normal {
+#ifquhmrexq .gt_font_normal {
   font-weight: normal;
 }
 
-#svqsukaebd .gt_font_bold {
+#ifquhmrexq .gt_font_bold {
   font-weight: bold;
 }
 
-#svqsukaebd .gt_font_italic {
+#ifquhmrexq .gt_font_italic {
   font-style: italic;
 }
 
-#svqsukaebd .gt_super {
+#ifquhmrexq .gt_super {
   font-size: 65%;
 }
 
-#svqsukaebd .gt_footnote_marks {
+#ifquhmrexq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#svqsukaebd .gt_asterisk {
+#ifquhmrexq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#svqsukaebd .gt_indent_1 {
+#ifquhmrexq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#svqsukaebd .gt_indent_2 {
+#ifquhmrexq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#svqsukaebd .gt_indent_3 {
+#ifquhmrexq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#svqsukaebd .gt_indent_4 {
+#ifquhmrexq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#svqsukaebd .gt_indent_5 {
+#ifquhmrexq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#svqsukaebd .katex-display {
+#ifquhmrexq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#svqsukaebd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ifquhmrexq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1727,6 +1773,1388 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
 </div>
 </div>
 </figure>
+</div>
+</div>
+<section id="initial-data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="initial-data-exploration">Initial Data Exploration</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(NETFLIX_DATA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 61,892
+Columns: 11
+$ year               &lt;int&gt; 2023, 2023, 2023, 2023, 2023, 2023, 2023, 2023, 202…
+$ period             &lt;chr&gt; "2023H1", "2023H1", "2023H1", "2023H1", "2023H1", "…
+$ period_start       &lt;date&gt; 2023-01-01, 2023-01-01, 2023-01-01, 2023-01-01, 20…
+$ period_end         &lt;date&gt; 2023-06-30, 2023-06-30, 2023-06-30, 2023-06-30, 20…
+$ title              &lt;chr&gt; "The Night Agent: Season 1", "Ginny &amp; Georgia: Seas…
+$ runtime            &lt;dbl&gt; 491, 587, 856, 409, 389, 497, 2703, 533, 548, 428, …
+$ views              &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ hours_viewed       &lt;dbl&gt; 812100000, 665100000, 622800000, 507700000, 5030000…
+$ release_date       &lt;date&gt; 2023-03-23, 2023-01-05, 2022-12-30, 2022-11-23, 20…
+$ available_globally &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TR…
+$ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(NETFLIX_DATA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">NETFLIX_DATA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">61892</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Date</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">logical</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">period</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">title</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">24427</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">min</th>
+<th style="text-align: left;">max</th>
+<th style="text-align: left;">median</th>
+<th style="text-align: right;">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">period_start</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">2023-01-01</td>
+<td style="text-align: left;">2026-01-01</td>
+<td style="text-align: left;">2024-01-01</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">period_end</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">2023-06-30</td>
+<td style="text-align: left;">2026-06-30</td>
+<td style="text-align: left;">2024-06-30</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">release_date</td>
+<td style="text-align: right;">35251</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: left;">2010-04-01</td>
+<td style="text-align: left;">2026-06-29</td>
+<td style="text-align: left;">2021-06-17</td>
+<td style="text-align: right;">2487</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 14%">
+<col style="width: 19%">
+<col style="width: 7%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: left;">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">available_globally</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: left;">FAL: 40171, TRU: 21719</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">live_event</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: left;">FAL: 61582, TRU: 310</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2024.11</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">2023</td>
+<td style="text-align: right;">2023</td>
+<td style="text-align: right;">2024</td>
+<td style="text-align: right;">2025</td>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">▇▅▁▅▂</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">runtime</td>
+<td style="text-align: right;">13085</td>
+<td style="text-align: right;">0.79</td>
+<td style="text-align: right;">467.35</td>
+<td style="text-align: right;">694.71</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">320</td>
+<td style="text-align: right;">545</td>
+<td style="text-align: right;">23853</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">views</td>
+<td style="text-align: right;">18198</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">1375241.45</td>
+<td style="text-align: right;">3630933.22</td>
+<td style="text-align: right;">100000</td>
+<td style="text-align: right;">100000</td>
+<td style="text-align: right;">400000</td>
+<td style="text-align: right;">1200000</td>
+<td style="text-align: right;">144800000</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hours_viewed</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">8265858.27</td>
+<td style="text-align: right;">24924226.03</td>
+<td style="text-align: right;">100000</td>
+<td style="text-align: right;">500000</td>
+<td style="text-align: right;">1800000</td>
+<td style="text-align: right;">6400000</td>
+<td style="text-align: right;">964100000</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>[WRITE 2-3 SENTENCES IN YOUR OWN WORDS HERE FOR TASK 4: Describe what <code>glimpse()</code> and <code>skim()</code> show above—mentioning that the dataset has 61,892 rows and 11 columns, that <code>year</code>, <code>runtime</code>, <code>views</code>, and <code>hours_viewed</code> are numeric while <code>available_globally</code> and <code>live_event</code> are logical TRUE/FALSE, and note which columns have missing values.]</p>
+</section>
+</section>
+<section id="exploratory-questions-inline-values" class="level1">
+<h1>Exploratory Questions (Inline Values)</h1>
+<ol type="1">
+<li><strong>Date Range:</strong> [Rewrite this in your own full sentence keeping the inline code:] 2023-01-01 to 2026-06-30.</li>
+<li><strong>Total Unique Titles:</strong> [Rewrite this in your own full sentence keeping the inline code:] 24,427.</li>
+<li><strong>Bridgerton Universe Watch Time:</strong> [Rewrite this in your own full sentence keeping the inline code:] 4,862,800,000 hours.</li>
+<li><strong>Stranger Things (5 Main Seasons) Watch Time:</strong> [Rewrite this in your own full sentence keeping the inline code:] 5,588,900,000 hours.</li>
+<li><strong>Top 10 Titles Share in 2026H1:</strong> [Rewrite this in your own full sentence keeping the inline code:] 6.70%.</li>
+<li><strong>Global Catalog Availability:</strong> [Rewrite this in your own full sentence keeping the inline code:] 35.1% by title and 51.9% weighted by hours viewed.</li>
+</ol>
+</section>
+<section id="additional-exploratory-tables-task-6-q1-q2" class="level1">
+<h1>Additional Exploratory Tables (Task 6 Q1 &amp; Q2)</h1>
+<section id="top-title-in-each-reporting-period" class="level3">
+<h3 class="anchored" data-anchor-id="top-title-in-each-reporting-period">Top Title in Each Reporting Period</h3>
+<div class="cell">
+<div id="tbl-top-title-per-period" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-top-title-per-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
+</figcaption>
+<div aria-describedby="tbl-top-title-per-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="qhjlfayegd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qhjlfayegd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qhjlfayegd thead, #qhjlfayegd tbody, #qhjlfayegd tfoot, #qhjlfayegd tr, #qhjlfayegd td, #qhjlfayegd th {
+  border-style: none;
+}
+
+#qhjlfayegd p {
+  margin: 0;
+  padding: 0;
+}
+
+#qhjlfayegd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qhjlfayegd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qhjlfayegd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qhjlfayegd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qhjlfayegd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qhjlfayegd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qhjlfayegd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qhjlfayegd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qhjlfayegd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qhjlfayegd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qhjlfayegd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qhjlfayegd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qhjlfayegd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qhjlfayegd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qhjlfayegd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qhjlfayegd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qhjlfayegd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qhjlfayegd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qhjlfayegd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qhjlfayegd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qhjlfayegd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qhjlfayegd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qhjlfayegd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qhjlfayegd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qhjlfayegd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qhjlfayegd .gt_left {
+  text-align: left;
+}
+
+#qhjlfayegd .gt_center {
+  text-align: center;
+}
+
+#qhjlfayegd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qhjlfayegd .gt_font_normal {
+  font-weight: normal;
+}
+
+#qhjlfayegd .gt_font_bold {
+  font-weight: bold;
+}
+
+#qhjlfayegd .gt_font_italic {
+  font-style: italic;
+}
+
+#qhjlfayegd .gt_super {
+  font-size: 65%;
+}
+
+#qhjlfayegd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qhjlfayegd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qhjlfayegd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qhjlfayegd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qhjlfayegd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qhjlfayegd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qhjlfayegd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qhjlfayegd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qhjlfayegd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="period" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Period</th>
+<th id="title" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Top Title</th>
+<th id="hours_viewed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Hours Viewed</th>
+<th id="share_of_period" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Share of Total Watch Time</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2023H1</td>
+<td class="gt_row gt_left" headers="title">The Night Agent: Season 1</td>
+<td class="gt_row gt_right" headers="hours_viewed">812,100,000</td>
+<td class="gt_row gt_right" headers="share_of_period">0.87%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2023H2</td>
+<td class="gt_row gt_left" headers="title">King the Land: Limited Series</td>
+<td class="gt_row gt_right" headers="hours_viewed">630,200,000</td>
+<td class="gt_row gt_right" headers="share_of_period">0.97%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2024H1</td>
+<td class="gt_row gt_left" headers="title">Bridgerton: Season 3</td>
+<td class="gt_row gt_right" headers="hours_viewed">733,800,000</td>
+<td class="gt_row gt_right" headers="share_of_period">1.08%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2024H2</td>
+<td class="gt_row gt_left" headers="title">Squid Game: Season 2</td>
+<td class="gt_row gt_right" headers="hours_viewed">619,900,000</td>
+<td class="gt_row gt_right" headers="share_of_period">0.91%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2025H1</td>
+<td class="gt_row gt_left" headers="title">Squid Game: Season 2</td>
+<td class="gt_row gt_right" headers="hours_viewed">840,300,000</td>
+<td class="gt_row gt_right" headers="share_of_period">1.18%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2025H2</td>
+<td class="gt_row gt_left" headers="title">Wednesday: Season 2</td>
+<td class="gt_row gt_right" headers="hours_viewed">964,100,000</td>
+<td class="gt_row gt_right" headers="share_of_period">1.35%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2026H1</td>
+<td class="gt_row gt_left" headers="title">Bridgerton: Season 4</td>
+<td class="gt_row gt_right" headers="hours_viewed">889,800,000</td>
+<td class="gt_row gt_right" headers="share_of_period">1.20%</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="evolution-of-netflix-catalog-size-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="evolution-of-netflix-catalog-size-over-time">Evolution of Netflix Catalog Size Over Time</h3>
+<div class="cell">
+<div id="tbl-catalog-size-trends" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-catalog-size-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
+</figcaption>
+<div aria-describedby="tbl-catalog-size-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="ifiohkchym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ifiohkchym table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ifiohkchym thead, #ifiohkchym tbody, #ifiohkchym tfoot, #ifiohkchym tr, #ifiohkchym td, #ifiohkchym th {
+  border-style: none;
+}
+
+#ifiohkchym p {
+  margin: 0;
+  padding: 0;
+}
+
+#ifiohkchym .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ifiohkchym .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ifiohkchym .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ifiohkchym .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ifiohkchym .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ifiohkchym .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ifiohkchym .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ifiohkchym .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ifiohkchym .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ifiohkchym .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ifiohkchym .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ifiohkchym .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ifiohkchym .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ifiohkchym .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ifiohkchym .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ifiohkchym .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ifiohkchym .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ifiohkchym .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ifiohkchym .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ifiohkchym .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ifiohkchym .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ifiohkchym .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ifiohkchym .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ifiohkchym .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ifiohkchym .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ifiohkchym .gt_left {
+  text-align: left;
+}
+
+#ifiohkchym .gt_center {
+  text-align: center;
+}
+
+#ifiohkchym .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ifiohkchym .gt_font_normal {
+  font-weight: normal;
+}
+
+#ifiohkchym .gt_font_bold {
+  font-weight: bold;
+}
+
+#ifiohkchym .gt_font_italic {
+  font-style: italic;
+}
+
+#ifiohkchym .gt_super {
+  font-size: 65%;
+}
+
+#ifiohkchym .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ifiohkchym .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ifiohkchym .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ifiohkchym .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ifiohkchym .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ifiohkchym .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ifiohkchym .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ifiohkchym .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ifiohkchym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="period" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Period</th>
+<th id="num_titles" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Total Catalog Titles</th>
+<th id="total_runtime_hours" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Total Runtime (Hours)</th>
+<th id="avg_runtime_mins" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Avg Runtime (Mins)</th>
+<th id="total_hours_viewed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Total Hours Viewed</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2023H1</td>
+<td class="gt_row gt_right" headers="num_titles">18,196</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">43,717</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">453.7</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">93,407,600,000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2023H2</td>
+<td class="gt_row gt_right" headers="num_titles">6,595</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">50,117</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">463.7</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">64,931,000,000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2024H1</td>
+<td class="gt_row gt_right" headers="num_titles">6,797</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">51,774</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">464.1</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">68,244,300,000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2024H2</td>
+<td class="gt_row gt_right" headers="num_titles">6,877</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">53,615</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">475.1</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">68,179,900,000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2025H1</td>
+<td class="gt_row gt_right" headers="num_titles">7,502</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">58,374</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">473.6</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">71,110,800,000</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="period">2025H2</td>
+<td class="gt_row gt_right" headers="num_titles">7,738</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">59,714</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">469.7</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">71,383,300,000</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="period">2026H1</td>
+<td class="gt_row gt_right" headers="num_titles">8,187</td>
+<td class="gt_row gt_right" headers="total_runtime_hours">62,855</td>
+<td class="gt_row gt_right" headers="avg_runtime_mins">468.3</td>
+<td class="gt_row gt_right" headers="total_hours_viewed">74,333,600,000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="platform-strategy-memo" class="level1">
+<h1>Platform Strategy Memo</h1>
+<p>[WRITE YOUR 750-WORD CORPORATE STRATEGY MEMO HERE IN YOUR OWN WORDS! Remember to plug in the inline variables above instead of typing numbers manually: - TV show share of total hours: 90.6% vs.&nbsp;Movie share: 9.4% - Catalog growth from 2023H1 (18,196 titles; 93,407,600,000 hours viewed) to 2026H1 (8,187 titles; 74,333,600,000 hours viewed) - Global availability share of watch time from 2023H1 (51.5%) to 2026H1 (48.6%) - Live event average viewership (3,560,000 hours) vs.&nbsp;Pre-taped average viewership (8,289,547 hours)]</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>AI Usage Statement
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Generative AI (Google Gemini) was used in this mini-project to assist with debugging R <code>tidyverse</code> pipelines, formatting <code>gt</code> tables, and customizing CSS styling for the Quarto document. All narrative text, analysis interpretation, and the Platform Strategy Memo were written entirely by the author without AI text generation, in accordance with STA 9750 course policies.</p>
+</div>
 </div>
 </div>
 

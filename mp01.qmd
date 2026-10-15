@@ -31,6 +31,41 @@ h1, h2, h3 {
     border-left: 5px solid #E50914 !important;
 }
 ```
+```{css, echo=FALSE}
+/* Netflix Red Accent Styling */
+body {
+    background-color: #141414 !important;
+    color: #ffffff !important;
+}
+
+a {
+    color: #E50914 !important;
+}
+
+/* Make the main page title (H1) much larger and bolder */
+h1 {
+    font-size: 2.8rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    border-bottom: 3px solid #E50914 !important;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* Keep regular section headings (H2, H3) smaller */
+h2, h3 {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    border-bottom: 2px solid #E50914;
+    padding-bottom: 5px;
+    margin-top: 35px;
+}
+
+.callout.callout-note {
+    background-color: #1f1f1f !important;
+    border-left: 5px solid #E50914 !important;
+}
+
 
 # Data Acquisition & Cleaning
 ```{r}

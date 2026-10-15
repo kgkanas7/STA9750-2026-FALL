@@ -161,8 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-acquisition-cleaning" id="toc-data-acquisition-cleaning" class="nav-link active" data-scroll-target="#data-acquisition-cleaning">Data Acquisition &amp; Cleaning</a></li>
-  <li><a href="#further-analysis-tables" id="toc-further-analysis-tables" class="nav-link" data-scroll-target="#further-analysis-tables">Further Analysis &amp; Tables</a></li>
+  <li><a href="#further-analysis-tables" id="toc-further-analysis-tables" class="nav-link active" data-scroll-target="#further-analysis-tables">Further Analysis &amp; Tables</a></li>
   <li><a href="#shows-vs.-movies" id="toc-shows-vs.-movies" class="nav-link" data-scroll-target="#shows-vs.-movies">Shows vs.&nbsp;Movies</a></li>
   <li><a href="#live-events-vs.-pre-recorded-content" id="toc-live-events-vs.-pre-recorded-content" class="nav-link" data-scroll-target="#live-events-vs.-pre-recorded-content">Live Events Vs. Pre-Recorded Content</a>
   <ul class="collapse">
@@ -224,21 +223,33 @@ a {
     color: #E50914 !important;
 }
 
-h1, h2, h3 {
+/* Make the main page title (H1) much larger and bolder */
+h1 {
+    font-size: 2.8rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    border-bottom: 3px solid #E50914 !important;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* Keep regular section headings (H2, H3) smaller */
+h2, h3 {
     color: #ffffff !important;
+    font-size: 1.5rem !important;
     border-bottom: 2px solid #E50914;
     padding-bottom: 5px;
+    margin-top: 35px;
 }
 
 .callout.callout-note {
     background-color: #1f1f1f !important;
     border-left: 5px solid #E50914 !important;
 }
+
+# Data Acquisition & Cleaning
 </style>
 </div>
-<section id="data-acquisition-cleaning" class="level1">
-<h1>Data Acquisition &amp; Cleaning</h1>
-</section>
 <section id="further-analysis-tables" class="level1">
 <h1>Further Analysis &amp; Tables</h1>
 <div class="cell">
@@ -249,23 +260,23 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
 </figcaption>
 <div aria-describedby="tbl-consistent-staples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="orsueprfmo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#orsueprfmo table {
+<div id="ikqoyruuov" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ikqoyruuov table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#orsueprfmo thead, #orsueprfmo tbody, #orsueprfmo tfoot, #orsueprfmo tr, #orsueprfmo td, #orsueprfmo th {
+#ikqoyruuov thead, #ikqoyruuov tbody, #ikqoyruuov tfoot, #ikqoyruuov tr, #ikqoyruuov td, #ikqoyruuov th {
   border-style: none;
 }
 
-#orsueprfmo p {
+#ikqoyruuov p {
   margin: 0;
   padding: 0;
 }
 
-#orsueprfmo .gt_table {
+#ikqoyruuov .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -291,12 +302,12 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-left-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_caption {
+#ikqoyruuov .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#orsueprfmo .gt_title {
+#ikqoyruuov .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -308,7 +319,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-width: 0;
 }
 
-#orsueprfmo .gt_subtitle {
+#ikqoyruuov .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -320,7 +331,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-top-width: 0;
 }
 
-#orsueprfmo .gt_heading {
+#ikqoyruuov .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -332,13 +343,13 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_bottom_border {
+#ikqoyruuov .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_col_headings {
+#ikqoyruuov .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -353,7 +364,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_col_heading {
+#ikqoyruuov .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -373,7 +384,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   overflow-x: hidden;
 }
 
-#orsueprfmo .gt_column_spanner_outer {
+#ikqoyruuov .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -385,15 +396,15 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 4px;
 }
 
-#orsueprfmo .gt_column_spanner_outer:first-child {
+#ikqoyruuov .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#orsueprfmo .gt_column_spanner_outer:last-child {
+#ikqoyruuov .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#orsueprfmo .gt_column_spanner {
+#ikqoyruuov .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -405,11 +416,11 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   width: 100%;
 }
 
-#orsueprfmo .gt_spanner_row {
+#ikqoyruuov .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#orsueprfmo .gt_group_heading {
+#ikqoyruuov .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -435,7 +446,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   text-align: left;
 }
 
-#orsueprfmo .gt_empty_group_heading {
+#ikqoyruuov .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -450,15 +461,15 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   vertical-align: middle;
 }
 
-#orsueprfmo .gt_from_md > :first-child {
+#ikqoyruuov .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#orsueprfmo .gt_from_md > :last-child {
+#ikqoyruuov .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#orsueprfmo .gt_row {
+#ikqoyruuov .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -477,7 +488,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   overflow-x: hidden;
 }
 
-#orsueprfmo .gt_stub {
+#ikqoyruuov .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -490,7 +501,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#orsueprfmo .gt_stub_row_group {
+#ikqoyruuov .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,15 +515,15 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   vertical-align: top;
 }
 
-#orsueprfmo .gt_row_group_first td {
+#ikqoyruuov .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#orsueprfmo .gt_row_group_first th {
+#ikqoyruuov .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#orsueprfmo .gt_summary_row {
+#ikqoyruuov .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -522,16 +533,16 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#orsueprfmo .gt_first_summary_row {
+#ikqoyruuov .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_first_summary_row.thick {
+#ikqoyruuov .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#orsueprfmo .gt_last_summary_row {
+#ikqoyruuov .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -541,7 +552,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_grand_summary_row {
+#ikqoyruuov .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -551,7 +562,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#orsueprfmo .gt_first_grand_summary_row {
+#ikqoyruuov .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -561,7 +572,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-top-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_last_grand_summary_row_top {
+#ikqoyruuov .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -571,11 +582,11 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_striped {
+#ikqoyruuov .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#orsueprfmo .gt_table_body {
+#ikqoyruuov .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -584,7 +595,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_footnotes {
+#ikqoyruuov .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -598,7 +609,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_footnote {
+#ikqoyruuov .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -607,7 +618,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#orsueprfmo .gt_sourcenotes {
+#ikqoyruuov .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -621,7 +632,7 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#orsueprfmo .gt_sourcenote {
+#ikqoyruuov .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -629,72 +640,72 @@ Table&nbsp;1: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#orsueprfmo .gt_left {
+#ikqoyruuov .gt_left {
   text-align: left;
 }
 
-#orsueprfmo .gt_center {
+#ikqoyruuov .gt_center {
   text-align: center;
 }
 
-#orsueprfmo .gt_right {
+#ikqoyruuov .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#orsueprfmo .gt_font_normal {
+#ikqoyruuov .gt_font_normal {
   font-weight: normal;
 }
 
-#orsueprfmo .gt_font_bold {
+#ikqoyruuov .gt_font_bold {
   font-weight: bold;
 }
 
-#orsueprfmo .gt_font_italic {
+#ikqoyruuov .gt_font_italic {
   font-style: italic;
 }
 
-#orsueprfmo .gt_super {
+#ikqoyruuov .gt_super {
   font-size: 65%;
 }
 
-#orsueprfmo .gt_footnote_marks {
+#ikqoyruuov .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#orsueprfmo .gt_asterisk {
+#ikqoyruuov .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#orsueprfmo .gt_indent_1 {
+#ikqoyruuov .gt_indent_1 {
   text-indent: 5px;
 }
 
-#orsueprfmo .gt_indent_2 {
+#ikqoyruuov .gt_indent_2 {
   text-indent: 10px;
 }
 
-#orsueprfmo .gt_indent_3 {
+#ikqoyruuov .gt_indent_3 {
   text-indent: 15px;
 }
 
-#orsueprfmo .gt_indent_4 {
+#ikqoyruuov .gt_indent_4 {
   text-indent: 20px;
 }
 
-#orsueprfmo .gt_indent_5 {
+#ikqoyruuov .gt_indent_5 {
   text-indent: 25px;
 }
 
-#orsueprfmo .katex-display {
+#ikqoyruuov .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#orsueprfmo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ikqoyruuov div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -765,23 +776,23 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
 </figcaption>
 <div aria-describedby="tbl-shows-vs-movies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="edvelcswuh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#edvelcswuh table {
+<div id="tcrzfyiita" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tcrzfyiita table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#edvelcswuh thead, #edvelcswuh tbody, #edvelcswuh tfoot, #edvelcswuh tr, #edvelcswuh td, #edvelcswuh th {
+#tcrzfyiita thead, #tcrzfyiita tbody, #tcrzfyiita tfoot, #tcrzfyiita tr, #tcrzfyiita td, #tcrzfyiita th {
   border-style: none;
 }
 
-#edvelcswuh p {
+#tcrzfyiita p {
   margin: 0;
   padding: 0;
 }
 
-#edvelcswuh .gt_table {
+#tcrzfyiita .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -807,12 +818,12 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-left-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_caption {
+#tcrzfyiita .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#edvelcswuh .gt_title {
+#tcrzfyiita .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -824,7 +835,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-width: 0;
 }
 
-#edvelcswuh .gt_subtitle {
+#tcrzfyiita .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -836,7 +847,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-top-width: 0;
 }
 
-#edvelcswuh .gt_heading {
+#tcrzfyiita .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -848,13 +859,13 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_bottom_border {
+#tcrzfyiita .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_col_headings {
+#tcrzfyiita .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -869,7 +880,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_col_heading {
+#tcrzfyiita .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -889,7 +900,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   overflow-x: hidden;
 }
 
-#edvelcswuh .gt_column_spanner_outer {
+#tcrzfyiita .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -901,15 +912,15 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 4px;
 }
 
-#edvelcswuh .gt_column_spanner_outer:first-child {
+#tcrzfyiita .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#edvelcswuh .gt_column_spanner_outer:last-child {
+#tcrzfyiita .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#edvelcswuh .gt_column_spanner {
+#tcrzfyiita .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -921,11 +932,11 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   width: 100%;
 }
 
-#edvelcswuh .gt_spanner_row {
+#tcrzfyiita .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#edvelcswuh .gt_group_heading {
+#tcrzfyiita .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -951,7 +962,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   text-align: left;
 }
 
-#edvelcswuh .gt_empty_group_heading {
+#tcrzfyiita .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -966,15 +977,15 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   vertical-align: middle;
 }
 
-#edvelcswuh .gt_from_md > :first-child {
+#tcrzfyiita .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#edvelcswuh .gt_from_md > :last-child {
+#tcrzfyiita .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#edvelcswuh .gt_row {
+#tcrzfyiita .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -993,7 +1004,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   overflow-x: hidden;
 }
 
-#edvelcswuh .gt_stub {
+#tcrzfyiita .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1006,7 +1017,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#edvelcswuh .gt_stub_row_group {
+#tcrzfyiita .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1020,15 +1031,15 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   vertical-align: top;
 }
 
-#edvelcswuh .gt_row_group_first td {
+#tcrzfyiita .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#edvelcswuh .gt_row_group_first th {
+#tcrzfyiita .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#edvelcswuh .gt_summary_row {
+#tcrzfyiita .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1038,16 +1049,16 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#edvelcswuh .gt_first_summary_row {
+#tcrzfyiita .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_first_summary_row.thick {
+#tcrzfyiita .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#edvelcswuh .gt_last_summary_row {
+#tcrzfyiita .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1057,7 +1068,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_grand_summary_row {
+#tcrzfyiita .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1067,7 +1078,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#edvelcswuh .gt_first_grand_summary_row {
+#tcrzfyiita .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1077,7 +1088,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-top-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_last_grand_summary_row_top {
+#tcrzfyiita .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1087,11 +1098,11 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_striped {
+#tcrzfyiita .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#edvelcswuh .gt_table_body {
+#tcrzfyiita .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1100,7 +1111,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_footnotes {
+#tcrzfyiita .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1114,7 +1125,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_footnote {
+#tcrzfyiita .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1123,7 +1134,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#edvelcswuh .gt_sourcenotes {
+#tcrzfyiita .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1137,7 +1148,7 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#edvelcswuh .gt_sourcenote {
+#tcrzfyiita .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1145,72 +1156,72 @@ Table&nbsp;2: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#edvelcswuh .gt_left {
+#tcrzfyiita .gt_left {
   text-align: left;
 }
 
-#edvelcswuh .gt_center {
+#tcrzfyiita .gt_center {
   text-align: center;
 }
 
-#edvelcswuh .gt_right {
+#tcrzfyiita .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#edvelcswuh .gt_font_normal {
+#tcrzfyiita .gt_font_normal {
   font-weight: normal;
 }
 
-#edvelcswuh .gt_font_bold {
+#tcrzfyiita .gt_font_bold {
   font-weight: bold;
 }
 
-#edvelcswuh .gt_font_italic {
+#tcrzfyiita .gt_font_italic {
   font-style: italic;
 }
 
-#edvelcswuh .gt_super {
+#tcrzfyiita .gt_super {
   font-size: 65%;
 }
 
-#edvelcswuh .gt_footnote_marks {
+#tcrzfyiita .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#edvelcswuh .gt_asterisk {
+#tcrzfyiita .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#edvelcswuh .gt_indent_1 {
+#tcrzfyiita .gt_indent_1 {
   text-indent: 5px;
 }
 
-#edvelcswuh .gt_indent_2 {
+#tcrzfyiita .gt_indent_2 {
   text-indent: 10px;
 }
 
-#edvelcswuh .gt_indent_3 {
+#tcrzfyiita .gt_indent_3 {
   text-indent: 15px;
 }
 
-#edvelcswuh .gt_indent_4 {
+#tcrzfyiita .gt_indent_4 {
   text-indent: 20px;
 }
 
-#edvelcswuh .gt_indent_5 {
+#tcrzfyiita .gt_indent_5 {
   text-indent: 25px;
 }
 
-#edvelcswuh .katex-display {
+#tcrzfyiita .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#edvelcswuh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tcrzfyiita div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1300,23 +1311,23 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
 </figcaption>
 <div aria-describedby="tbl-live-vs-taped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="iyxojtzuvz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iyxojtzuvz table {
+<div id="hutxzheuup" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hutxzheuup table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iyxojtzuvz thead, #iyxojtzuvz tbody, #iyxojtzuvz tfoot, #iyxojtzuvz tr, #iyxojtzuvz td, #iyxojtzuvz th {
+#hutxzheuup thead, #hutxzheuup tbody, #hutxzheuup tfoot, #hutxzheuup tr, #hutxzheuup td, #hutxzheuup th {
   border-style: none;
 }
 
-#iyxojtzuvz p {
+#hutxzheuup p {
   margin: 0;
   padding: 0;
 }
 
-#iyxojtzuvz .gt_table {
+#hutxzheuup .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1342,12 +1353,12 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-left-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_caption {
+#hutxzheuup .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iyxojtzuvz .gt_title {
+#hutxzheuup .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1359,7 +1370,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-width: 0;
 }
 
-#iyxojtzuvz .gt_subtitle {
+#hutxzheuup .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1371,7 +1382,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-top-width: 0;
 }
 
-#iyxojtzuvz .gt_heading {
+#hutxzheuup .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1383,13 +1394,13 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_bottom_border {
+#hutxzheuup .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_col_headings {
+#hutxzheuup .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1404,7 +1415,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_col_heading {
+#hutxzheuup .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1424,7 +1435,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   overflow-x: hidden;
 }
 
-#iyxojtzuvz .gt_column_spanner_outer {
+#hutxzheuup .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1436,15 +1447,15 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 4px;
 }
 
-#iyxojtzuvz .gt_column_spanner_outer:first-child {
+#hutxzheuup .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iyxojtzuvz .gt_column_spanner_outer:last-child {
+#hutxzheuup .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iyxojtzuvz .gt_column_spanner {
+#hutxzheuup .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1456,11 +1467,11 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   width: 100%;
 }
 
-#iyxojtzuvz .gt_spanner_row {
+#hutxzheuup .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iyxojtzuvz .gt_group_heading {
+#hutxzheuup .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1486,7 +1497,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   text-align: left;
 }
 
-#iyxojtzuvz .gt_empty_group_heading {
+#hutxzheuup .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1501,15 +1512,15 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   vertical-align: middle;
 }
 
-#iyxojtzuvz .gt_from_md > :first-child {
+#hutxzheuup .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iyxojtzuvz .gt_from_md > :last-child {
+#hutxzheuup .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iyxojtzuvz .gt_row {
+#hutxzheuup .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1528,7 +1539,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   overflow-x: hidden;
 }
 
-#iyxojtzuvz .gt_stub {
+#hutxzheuup .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1541,7 +1552,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#iyxojtzuvz .gt_stub_row_group {
+#hutxzheuup .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1555,15 +1566,15 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   vertical-align: top;
 }
 
-#iyxojtzuvz .gt_row_group_first td {
+#hutxzheuup .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iyxojtzuvz .gt_row_group_first th {
+#hutxzheuup .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iyxojtzuvz .gt_summary_row {
+#hutxzheuup .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1573,16 +1584,16 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#iyxojtzuvz .gt_first_summary_row {
+#hutxzheuup .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_first_summary_row.thick {
+#hutxzheuup .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iyxojtzuvz .gt_last_summary_row {
+#hutxzheuup .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1592,7 +1603,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_grand_summary_row {
+#hutxzheuup .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1602,7 +1613,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#iyxojtzuvz .gt_first_grand_summary_row {
+#hutxzheuup .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1612,7 +1623,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-top-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_last_grand_summary_row_top {
+#hutxzheuup .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1622,11 +1633,11 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_striped {
+#hutxzheuup .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iyxojtzuvz .gt_table_body {
+#hutxzheuup .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1635,7 +1646,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_footnotes {
+#hutxzheuup .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1649,7 +1660,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_footnote {
+#hutxzheuup .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1658,7 +1669,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#iyxojtzuvz .gt_sourcenotes {
+#hutxzheuup .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1672,7 +1683,7 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#iyxojtzuvz .gt_sourcenote {
+#hutxzheuup .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1680,72 +1691,72 @@ Table&nbsp;3: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#iyxojtzuvz .gt_left {
+#hutxzheuup .gt_left {
   text-align: left;
 }
 
-#iyxojtzuvz .gt_center {
+#hutxzheuup .gt_center {
   text-align: center;
 }
 
-#iyxojtzuvz .gt_right {
+#hutxzheuup .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iyxojtzuvz .gt_font_normal {
+#hutxzheuup .gt_font_normal {
   font-weight: normal;
 }
 
-#iyxojtzuvz .gt_font_bold {
+#hutxzheuup .gt_font_bold {
   font-weight: bold;
 }
 
-#iyxojtzuvz .gt_font_italic {
+#hutxzheuup .gt_font_italic {
   font-style: italic;
 }
 
-#iyxojtzuvz .gt_super {
+#hutxzheuup .gt_super {
   font-size: 65%;
 }
 
-#iyxojtzuvz .gt_footnote_marks {
+#hutxzheuup .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iyxojtzuvz .gt_asterisk {
+#hutxzheuup .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iyxojtzuvz .gt_indent_1 {
+#hutxzheuup .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iyxojtzuvz .gt_indent_2 {
+#hutxzheuup .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iyxojtzuvz .gt_indent_3 {
+#hutxzheuup .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iyxojtzuvz .gt_indent_4 {
+#hutxzheuup .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iyxojtzuvz .gt_indent_5 {
+#hutxzheuup .gt_indent_5 {
   text-indent: 25px;
 }
 
-#iyxojtzuvz .katex-display {
+#hutxzheuup .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#iyxojtzuvz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hutxzheuup div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2097,23 +2108,23 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
 </figcaption>
 <div aria-describedby="tbl-top-title-per-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="idkkoblpxb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#idkkoblpxb table {
+<div id="rhqkipfogo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rhqkipfogo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#idkkoblpxb thead, #idkkoblpxb tbody, #idkkoblpxb tfoot, #idkkoblpxb tr, #idkkoblpxb td, #idkkoblpxb th {
+#rhqkipfogo thead, #rhqkipfogo tbody, #rhqkipfogo tfoot, #rhqkipfogo tr, #rhqkipfogo td, #rhqkipfogo th {
   border-style: none;
 }
 
-#idkkoblpxb p {
+#rhqkipfogo p {
   margin: 0;
   padding: 0;
 }
 
-#idkkoblpxb .gt_table {
+#rhqkipfogo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2139,12 +2150,12 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-left-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_caption {
+#rhqkipfogo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#idkkoblpxb .gt_title {
+#rhqkipfogo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2156,7 +2167,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-bottom-width: 0;
 }
 
-#idkkoblpxb .gt_subtitle {
+#rhqkipfogo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2168,7 +2179,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-top-width: 0;
 }
 
-#idkkoblpxb .gt_heading {
+#rhqkipfogo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2180,13 +2191,13 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_bottom_border {
+#rhqkipfogo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_col_headings {
+#rhqkipfogo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2201,7 +2212,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_col_heading {
+#rhqkipfogo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2221,7 +2232,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   overflow-x: hidden;
 }
 
-#idkkoblpxb .gt_column_spanner_outer {
+#rhqkipfogo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2233,15 +2244,15 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   padding-right: 4px;
 }
 
-#idkkoblpxb .gt_column_spanner_outer:first-child {
+#rhqkipfogo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#idkkoblpxb .gt_column_spanner_outer:last-child {
+#rhqkipfogo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#idkkoblpxb .gt_column_spanner {
+#rhqkipfogo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2253,11 +2264,11 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   width: 100%;
 }
 
-#idkkoblpxb .gt_spanner_row {
+#rhqkipfogo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#idkkoblpxb .gt_group_heading {
+#rhqkipfogo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2283,7 +2294,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   text-align: left;
 }
 
-#idkkoblpxb .gt_empty_group_heading {
+#rhqkipfogo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2298,15 +2309,15 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   vertical-align: middle;
 }
 
-#idkkoblpxb .gt_from_md > :first-child {
+#rhqkipfogo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#idkkoblpxb .gt_from_md > :last-child {
+#rhqkipfogo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#idkkoblpxb .gt_row {
+#rhqkipfogo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2325,7 +2336,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   overflow-x: hidden;
 }
 
-#idkkoblpxb .gt_stub {
+#rhqkipfogo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2338,7 +2349,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#idkkoblpxb .gt_stub_row_group {
+#rhqkipfogo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2352,15 +2363,15 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   vertical-align: top;
 }
 
-#idkkoblpxb .gt_row_group_first td {
+#rhqkipfogo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#idkkoblpxb .gt_row_group_first th {
+#rhqkipfogo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#idkkoblpxb .gt_summary_row {
+#rhqkipfogo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2370,16 +2381,16 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#idkkoblpxb .gt_first_summary_row {
+#rhqkipfogo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_first_summary_row.thick {
+#rhqkipfogo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#idkkoblpxb .gt_last_summary_row {
+#rhqkipfogo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2389,7 +2400,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-bottom-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_grand_summary_row {
+#rhqkipfogo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2399,7 +2410,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#idkkoblpxb .gt_first_grand_summary_row {
+#rhqkipfogo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2409,7 +2420,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-top-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_last_grand_summary_row_top {
+#rhqkipfogo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2419,11 +2430,11 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-bottom-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_striped {
+#rhqkipfogo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#idkkoblpxb .gt_table_body {
+#rhqkipfogo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2432,7 +2443,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-bottom-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_footnotes {
+#rhqkipfogo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2446,7 +2457,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_footnote {
+#rhqkipfogo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2455,7 +2466,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#idkkoblpxb .gt_sourcenotes {
+#rhqkipfogo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2469,7 +2480,7 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#idkkoblpxb .gt_sourcenote {
+#rhqkipfogo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2477,72 +2488,72 @@ Table&nbsp;4: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#idkkoblpxb .gt_left {
+#rhqkipfogo .gt_left {
   text-align: left;
 }
 
-#idkkoblpxb .gt_center {
+#rhqkipfogo .gt_center {
   text-align: center;
 }
 
-#idkkoblpxb .gt_right {
+#rhqkipfogo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#idkkoblpxb .gt_font_normal {
+#rhqkipfogo .gt_font_normal {
   font-weight: normal;
 }
 
-#idkkoblpxb .gt_font_bold {
+#rhqkipfogo .gt_font_bold {
   font-weight: bold;
 }
 
-#idkkoblpxb .gt_font_italic {
+#rhqkipfogo .gt_font_italic {
   font-style: italic;
 }
 
-#idkkoblpxb .gt_super {
+#rhqkipfogo .gt_super {
   font-size: 65%;
 }
 
-#idkkoblpxb .gt_footnote_marks {
+#rhqkipfogo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#idkkoblpxb .gt_asterisk {
+#rhqkipfogo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#idkkoblpxb .gt_indent_1 {
+#rhqkipfogo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#idkkoblpxb .gt_indent_2 {
+#rhqkipfogo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#idkkoblpxb .gt_indent_3 {
+#rhqkipfogo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#idkkoblpxb .gt_indent_4 {
+#rhqkipfogo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#idkkoblpxb .gt_indent_5 {
+#rhqkipfogo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#idkkoblpxb .katex-display {
+#rhqkipfogo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#idkkoblpxb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rhqkipfogo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2619,23 +2630,23 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
 </figcaption>
 <div aria-describedby="tbl-catalog-size-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="orgtqbxmki" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#orgtqbxmki table {
+<div id="pjkwrrblkw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pjkwrrblkw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#orgtqbxmki thead, #orgtqbxmki tbody, #orgtqbxmki tfoot, #orgtqbxmki tr, #orgtqbxmki td, #orgtqbxmki th {
+#pjkwrrblkw thead, #pjkwrrblkw tbody, #pjkwrrblkw tfoot, #pjkwrrblkw tr, #pjkwrrblkw td, #pjkwrrblkw th {
   border-style: none;
 }
 
-#orgtqbxmki p {
+#pjkwrrblkw p {
   margin: 0;
   padding: 0;
 }
 
-#orgtqbxmki .gt_table {
+#pjkwrrblkw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2661,12 +2672,12 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-left-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_caption {
+#pjkwrrblkw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#orgtqbxmki .gt_title {
+#pjkwrrblkw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2678,7 +2689,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-width: 0;
 }
 
-#orgtqbxmki .gt_subtitle {
+#pjkwrrblkw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2690,7 +2701,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-top-width: 0;
 }
 
-#orgtqbxmki .gt_heading {
+#pjkwrrblkw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2702,13 +2713,13 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_bottom_border {
+#pjkwrrblkw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_col_headings {
+#pjkwrrblkw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2723,7 +2734,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_col_heading {
+#pjkwrrblkw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2743,7 +2754,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   overflow-x: hidden;
 }
 
-#orgtqbxmki .gt_column_spanner_outer {
+#pjkwrrblkw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2755,15 +2766,15 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 4px;
 }
 
-#orgtqbxmki .gt_column_spanner_outer:first-child {
+#pjkwrrblkw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#orgtqbxmki .gt_column_spanner_outer:last-child {
+#pjkwrrblkw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#orgtqbxmki .gt_column_spanner {
+#pjkwrrblkw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2775,11 +2786,11 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   width: 100%;
 }
 
-#orgtqbxmki .gt_spanner_row {
+#pjkwrrblkw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#orgtqbxmki .gt_group_heading {
+#pjkwrrblkw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2805,7 +2816,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   text-align: left;
 }
 
-#orgtqbxmki .gt_empty_group_heading {
+#pjkwrrblkw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2820,15 +2831,15 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   vertical-align: middle;
 }
 
-#orgtqbxmki .gt_from_md > :first-child {
+#pjkwrrblkw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#orgtqbxmki .gt_from_md > :last-child {
+#pjkwrrblkw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#orgtqbxmki .gt_row {
+#pjkwrrblkw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2847,7 +2858,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   overflow-x: hidden;
 }
 
-#orgtqbxmki .gt_stub {
+#pjkwrrblkw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2860,7 +2871,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#orgtqbxmki .gt_stub_row_group {
+#pjkwrrblkw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2874,15 +2885,15 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   vertical-align: top;
 }
 
-#orgtqbxmki .gt_row_group_first td {
+#pjkwrrblkw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#orgtqbxmki .gt_row_group_first th {
+#pjkwrrblkw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#orgtqbxmki .gt_summary_row {
+#pjkwrrblkw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2892,16 +2903,16 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#orgtqbxmki .gt_first_summary_row {
+#pjkwrrblkw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_first_summary_row.thick {
+#pjkwrrblkw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#orgtqbxmki .gt_last_summary_row {
+#pjkwrrblkw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2911,7 +2922,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_grand_summary_row {
+#pjkwrrblkw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2921,7 +2932,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#orgtqbxmki .gt_first_grand_summary_row {
+#pjkwrrblkw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2931,7 +2942,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-top-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_last_grand_summary_row_top {
+#pjkwrrblkw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2941,11 +2952,11 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_striped {
+#pjkwrrblkw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#orgtqbxmki .gt_table_body {
+#pjkwrrblkw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2954,7 +2965,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_footnotes {
+#pjkwrrblkw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2968,7 +2979,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_footnote {
+#pjkwrrblkw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2977,7 +2988,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#orgtqbxmki .gt_sourcenotes {
+#pjkwrrblkw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2991,7 +3002,7 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#orgtqbxmki .gt_sourcenote {
+#pjkwrrblkw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2999,72 +3010,72 @@ Table&nbsp;5: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#orgtqbxmki .gt_left {
+#pjkwrrblkw .gt_left {
   text-align: left;
 }
 
-#orgtqbxmki .gt_center {
+#pjkwrrblkw .gt_center {
   text-align: center;
 }
 
-#orgtqbxmki .gt_right {
+#pjkwrrblkw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#orgtqbxmki .gt_font_normal {
+#pjkwrrblkw .gt_font_normal {
   font-weight: normal;
 }
 
-#orgtqbxmki .gt_font_bold {
+#pjkwrrblkw .gt_font_bold {
   font-weight: bold;
 }
 
-#orgtqbxmki .gt_font_italic {
+#pjkwrrblkw .gt_font_italic {
   font-style: italic;
 }
 
-#orgtqbxmki .gt_super {
+#pjkwrrblkw .gt_super {
   font-size: 65%;
 }
 
-#orgtqbxmki .gt_footnote_marks {
+#pjkwrrblkw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#orgtqbxmki .gt_asterisk {
+#pjkwrrblkw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#orgtqbxmki .gt_indent_1 {
+#pjkwrrblkw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#orgtqbxmki .gt_indent_2 {
+#pjkwrrblkw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#orgtqbxmki .gt_indent_3 {
+#pjkwrrblkw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#orgtqbxmki .gt_indent_4 {
+#pjkwrrblkw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#orgtqbxmki .gt_indent_5 {
+#pjkwrrblkw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#orgtqbxmki .katex-display {
+#pjkwrrblkw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#orgtqbxmki div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pjkwrrblkw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

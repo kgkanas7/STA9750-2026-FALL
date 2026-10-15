@@ -1,6 +1,6 @@
 ---
 title: "Mini-Project #01: What We Watched"
-author: "Konstantinos Gkanas" 
+author: "Konstantinos Gkanas"
 class: STA 9750 - Software Tools for Data Analysis
 format:
   html:
@@ -9,28 +9,6 @@ format:
     toc: true
 ---
 
-```{css, echo=FALSE}
-/* Netflix Red Accent Styling */
-body {
-    background-color: #141414 !important;
-    color: #ffffff !important;
-}
-
-a {
-    color: #E50914 !important;
-}
-
-h1, h2, h3 {
-    color: #ffffff !important;
-    border-bottom: 2px solid #E50914;
-    padding-bottom: 5px;
-}
-
-.callout.callout-note {
-    background-color: #1f1f1f !important;
-    border-left: 5px solid #E50914 !important;
-}
-```
 ```{css, echo=FALSE}
 /* Netflix Red Accent Styling */
 body {
@@ -65,6 +43,7 @@ h2, h3 {
     background-color: #1f1f1f !important;
     border-left: 5px solid #E50914 !important;
 }
+```
 
 
 # Data Acquisition & Cleaning

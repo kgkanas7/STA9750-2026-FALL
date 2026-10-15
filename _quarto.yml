@@ -10,6 +10,13 @@ website:
   navbar:
     background: primary
     search: false
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Mini-Projects"
+        menu:
+          - text: "Mini-Project #01: Netflix"
+            href: mp01.qmd
     
 format:
   html:

@@ -207,7 +207,7 @@ glimpse(NETFLIX_DATA)
 skim(NETFLIX_DATA)
 ```
 
-[WRITE 2-3 SENTENCES IN YOUR OWN WORDS HERE FOR TASK 4: Describe what `glimpse()` and `skim()` show above—mentioning that the dataset has `r scales::comma(nrow(NETFLIX_DATA))` rows and 11 columns, that `year`, `runtime`, `views`, and `hours_viewed` are numeric while `available_globally` and `live_event` are logical TRUE/FALSE, and note which columns have missing values.]
+After completing the EDA pass using the glimpse() and skim() I can say that the cleaned up dataset consists of 61892 rows and has a 11 columns total. Each row has a unique category, such as year, period (period start/end), title, runtime, views, hours viewed, release date, global availability, and whether or not the content was a live event or pre-taped. All in all, the data pipeline for the Netlfix report was completed successfully. 
 
 # Exploratory Questions (Inline Values)
 
@@ -261,12 +261,13 @@ global_by_hours <- NETFLIX_DATA |>
   pull(frac)
 ```
 
-1. **Date Range:** [Rewrite this in your own full sentence keeping the inline code:] `r min_date` to `r max_date`.
-2. **Total Unique Titles:** [Rewrite this in your own full sentence keeping the inline code:] `r comma(num_unique_titles)`.
-3. **Bridgerton Universe Watch Time:** [Rewrite this in your own full sentence keeping the inline code:] `r comma(bridgerton_hours)` hours.
-4. **Stranger Things (5 Main Seasons) Watch Time:** [Rewrite this in your own full sentence keeping the inline code:] `r comma(stranger_things_hours)` hours.
-5. **Top 10 Titles Share in 2026H1:** [Rewrite this in your own full sentence keeping the inline code:] `r percent(top10_2026h1_share, accuracy = 0.01)`.
-6. **Global Catalog Availability:** [Rewrite this in your own full sentence keeping the inline code:] `r percent(global_by_title, accuracy = 0.1)` by title and `r percent(global_by_hours, accuracy = 0.1)` weighted by hours viewed.
+## Exploratory Questions & Summary Findings
+
+An analysis of the Netflix engagement data reveals several key behavioral patterns across the catalog:
+* **Coverage Window:** The dataset spans from `r min_date` to `r max_date`, encompassing `r comma(num_unique_titles)` unique catalog titles.
+* **Franchise Impact:** High-profile intellectual property drives massive recurring engagement, with the *Bridgerton* universe pulling in `r comma(bridgerton_hours)` hours and the five main seasons of *Stranger Things* generating `r comma(stranger_things_hours)` hours of watch time.
+* **Top-Tier Concentration:** The Top 10 titles alone accounted for `r percent(top10_2026h1_share, accuracy = 0.01)` of all watch time in 2026H1.
+* **Global Reach:** Approximately `r percent(global_by_title, accuracy = 0.1)` of titles are available globally, which expands to `r percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
 
 # Additional Exploratory Tables (Task 6 Q1 & Q2)
 
@@ -368,7 +369,7 @@ live_avg_hours <- NETFLIX_DATA |> filter(live_event) |> summarize(m = mean(hours
 taped_avg_hours <- NETFLIX_DATA |> filter(!live_event) |> summarize(m = mean(hours_viewed, na.rm = TRUE)) |> pull(m)
 ```
 
-[WRITE YOUR 750-WORD CORPORATE STRATEGY MEMO HERE IN YOUR OWN WORDS! 
+## Platform Strategy Memo 
 Remember to plug in the inline variables above instead of typing numbers manually:
 - TV show share of total hours: `r memo_tv_share` vs. Movie share: `r memo_movie_share`
 - Catalog growth from 2023H1 (`r comma(titles_2023h1)` titles; `r comma(hours_2023h1)` hours viewed) to 2026H1 (`r comma(titles_2026h1)` titles; `r comma(hours_2026h1)` hours viewed)

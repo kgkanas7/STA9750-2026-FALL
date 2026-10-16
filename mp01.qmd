@@ -226,7 +226,7 @@ skim(NETFLIX_DATA)
 
 After completing the EDA pass using the glimpse() and skim() I can say that the cleaned up dataset consists of 61892 rows and has a 11 columns total. Each row has a unique category, such as year, period (period start/end), title, runtime, views, hours viewed, release date, global availability, and whether or not the content was a live event or pre-taped. All in all, the data pipeline for the Netlfix report was completed successfully. 
 
-
+## Exploratory Questions & Summary Findings
 
 ```{r}
 #| label: task5-inline-calcs
@@ -251,12 +251,11 @@ bridgerton_hours <- NETFLIX_DATA |>
   pull(total)
 
 # Q4: Total hours watching the 5 seasons of Stranger Things
-# Sequentially filtering out companion/spinoff titles using filter_out()
 stranger_things_hours <- NETFLIX_DATA |>
   filter(str_detect(title, "Stranger Things")) |>
-  filter_out(str_detect(title, "Beyond Stranger Things")) |>
-  filter_out(str_detect(title, "Tales from")) |>
-  filter_out(str_detect(title, "Fireplace")) |>
+  filter(!str_detect(title, "Beyond Stranger Things")) |>
+  filter(!str_detect(title, "Tales from")) |>
+  filter(!str_detect(title, "Fireplace")) |>
   summarize(total = sum(hours_viewed, na.rm = TRUE)) |>
   pull(total)
 
@@ -278,13 +277,7 @@ global_by_hours <- NETFLIX_DATA |>
   pull(frac)
 ```
 
-## Exploratory Questions & Summary Findings
 
-An analysis of the Netflix engagement data reveals several key behavioral patterns across the catalog:
-* **Coverage Window:** The dataset spans from `r min_date` to `r max_date`, encompassing `r comma(num_unique_titles)` unique catalog titles.
-* **Franchise Impact:** High-profile intellectual property drives massive recurring engagement, with the *Bridgerton* universe pulling in `r comma(bridgerton_hours)` hours and the five main seasons of *Stranger Things* generating `r comma(stranger_things_hours)` hours of watch time.
-* **Top-Tier Concentration:** The Top 10 titles alone accounted for `r percent(top10_2026h1_share, accuracy = 0.01)` of all watch time in 2026H1.
-* **Global Reach:** Approximately `r percent(global_by_title, accuracy = 0.1)` of titles are available globally, which expands to `r percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
 
 # Additional Exploratory Tables 
 

@@ -46,7 +46,7 @@
     "href": "mp01.html#exploratory-questions-summary-findings",
     "title": "Mini-Project #01: What We Watched",
     "section": "Exploratory Questions & Summary Findings",
-    "text": "Exploratory Questions & Summary Findings\nAn analysis of the Netflix engagement data reveals several key behavioral patterns across the catalog: * Coverage Window: The dataset spans from 2023-01-01 to 2026-06-30, encompassing 24,427 unique catalog titles. * Franchise Impact: High-profile intellectual property drives massive recurring engagement, with the Bridgerton universe pulling in 4,862,800,000 hours and the five main seasons of Stranger Things generating 5,588,900,000 hours of watch time. * Top-Tier Concentration: The Top 10 titles alone accounted for 6.70% of all watch time in 2026H1. * Global Reach: Approximately 35.1% of titles are available globally, which expands to 51.9% when weighted by total hours viewed."
+    "text": "Exploratory Questions & Summary Findings"
   },
   {
     "objectID": "mp01.html#platform-strategy-memo-1",

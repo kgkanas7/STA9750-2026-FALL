@@ -45,7 +45,7 @@ h2, h3, h4, h5, h6, h7 {
 }
 ```
 
-# Data Acquisition & Cleaning
+## Data Acquisition & Cleaning
 ```{r}
 #| message: false
 #| warning: false
@@ -127,7 +127,7 @@ load_netflix_data <- function(){
 NETFLIX_DATA <- load_netflix_data()
 ```
 
-# Further Analysis & Tables 
+## Further Analysis & Tables 
 ```{r}
 #| label: tbl-consistent-staples
 #| tbl-cap: "Top Consistent 'Staple' Titles Across Multiple Periods"
@@ -157,7 +157,7 @@ NETFLIX_DATA |>
   )
 ```
 
-# Shows vs. Movies 
+## Shows vs. Movies 
 ```{r}
 #| label: tbl-shows-vs-movies
 #| tbl-cap: "Fraction of Watch Time: Shows vs. Movies"
@@ -180,7 +180,7 @@ NETFLIX_DATA |>
   cols_label(period = "Period")
 ```
 
-# Live Events Vs. Pre-Recorded Content
+## Live Events Vs. Pre-Recorded Content
 ```{r}
 #| label: tbl-live-vs-taped
 #| tbl-cap: "Performance Comparison: Live Events vs. Pre-Taped Content"
@@ -286,7 +286,7 @@ The Top 10 titles of 2026H1 alone represented `r scales::percent(top10_2026h1_sh
 6. What fraction of Netflix’s catalog is globally available? (Answered both by title and weighted by hours viewed)
 Global catalog availability stands at `r scales::percent(global_by_title, accuracy = 0.1)` by total title count, which shifts to `r scales::percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
 
-# Platform Strategy Memo
+## Platform Strategy Memo
 
 ```{r}
 #| label: memo-supporting-calcs

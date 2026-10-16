@@ -20,8 +20,8 @@ a {
     color: #E50914 !important;
 }
 
-/* Make the main page title (H1) much larger and bolder */
-h1 {
+/* Make only the main page title extra large and bold */
+.title {
     font-size: 2.8rem !important;
     font-weight: 800 !important;
     letter-spacing: -0.5px;
@@ -30,8 +30,8 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* Keep regular section headings (H2, H3) smaller */
-h2, h3 {
+/* Apply red bottom border to all headings from h2 down to h7 */
+h2, h3, h4, h5, h6, h7 {
     color: #ffffff !important;
     font-size: 1.5rem !important;
     border-bottom: 2px solid #E50914;
@@ -44,7 +44,6 @@ h2, h3 {
     border-left: 5px solid #E50914 !important;
 }
 ```
-
 
 # Data Acquisition & Cleaning
 ```{r}

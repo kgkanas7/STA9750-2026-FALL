@@ -1,5 +1,5 @@
 ---
-title: "Mini-Project #01: What We Watched"
+title: "Mini-Project #01: What We Watched: Exploring Netflix Viewing Data"
 author: "Konstantinos Gkanas"
 class: STA 9750 - Software Tools for Data Analysis
 format:
@@ -8,6 +8,8 @@ format:
     css: styles.css
     toc: true
 ---
+
+![Netflix Logo](netflix_logo.png)
 
 ```{css, echo=FALSE}
 /* Netflix Red Accent Styling */
@@ -46,7 +48,9 @@ h2, h3, h4, h5, h6, h7 {
 ```
 
 ## Data Acquisition & Cleaning
+
 ```{r}
+#| label: task1-3-load-data
 #| message: false
 #| warning: false
 #| echo: false
@@ -64,50 +68,33 @@ load_netflix_data <- function(){
     dir_create(data_dir, showWarnings=FALSE, recurse=TRUE)
   }
   
-  NETFLIX_URLS <- list(
-    `2023H1` = "https://about.netflix.com/news/what-we-watched-a-netflix-engagement-report",
-    `2023H2` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2023",
-    `2024H1` = "https://about.netflix.com/news/what-we-watched-the-first-half-of-2024",
-    `2024H2` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2024",
-    `2025H1` = "https://about.netflix.com/news/what-we-watched-the-first-half-of-2025",
-    `2025H2` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2025",
-    `2026H1` = "https://about.netflix.com/news/what-we-watched-the-second-half-of-2026"
-  )
+  periods <- c("2023H1", "2023H2", "2024H1", "2024H2", "2025H1", "2025H2", "2026H1")
+  file_paths <- path(data_dir, paste0(periods, ".xlsx"))
   
-  download_if_needed <- function(url, local){
-    if(!file_exists(local)){
-      download.file(url, local, quiet = TRUE, mode = "wb")
-    }
-    return(local)
-  }
-  
-  NETFLIX_URLS |> 
-    map(read_html) |> 
-    map(html_element, xpath = "//a[contains(@href, '.xlsx')]") |> 
-    map_chr(html_attr, "href") |> 
-    enframe("period", "url") |>
-    mutate(path = path(data_dir, paste0(period, ".xlsx")), 
-           path = map2(url, path, download_if_needed), 
-           data = map(path, read_excel, skip=3, na="*"), 
-           data = map(data, \(x) x |> mutate(`Release Date` = as.Date(`Release Date`)))) |>
-    unnest(data) |> 
-    select(-url, -path) |> 
-    mutate(year=str_sub(period, 1, 4), 
-           half=str_sub(period, start=6), 
-           period_start = make_date(year, if_else(half==1, 1, 7), 1), 
-           period_end = make_date(year, if_else(half==1, 6, 12), if_else(half==1, 30, 31))) |> 
+  # Read directly from local files to avoid web scraping/network errors
+  tibble(period = periods, path = file_paths) |>
+    mutate(
+      data = map(path, read_excel, skip = 3, na = "*"),
+      data = map(data, \(x) x |> mutate(`Release Date` = as.Date(`Release Date`)))
+    ) |>
+    select(-path) |>
+    unnest(data) |>
+    mutate(year = str_sub(period, 1, 4), 
+           half = str_sub(period, start = 6), 
+           period_start = make_date(year, if_else(half == 1, 1, 7), 1), 
+           period_end = make_date(year, if_else(half == 1, 6, 12), if_else(half == 1, 30, 31))) |> 
     filter(!is.na(`Hours Viewed`)) |> 
     mutate(live_event = !is.na(Runtime) & str_detect(Runtime, "\\d+:\\d+\\*"), 
            clean_time = str_remove(Runtime, fixed("*")),
            Runtime = 60 * hour(hm(clean_time)) + minute(hm(clean_time))) |> 
     select(-clean_time) |> 
-    mutate(Runtime = coalesce(Runtime, mean(Runtime, na.rm=TRUE)), 
-           .by=Title, 
+    mutate(Runtime = coalesce(Runtime, mean(Runtime, na.rm = TRUE)), 
+           .by = Title, 
            Title = stringi::stri_trans_general(Title, "Latin-ASCII"),
            Title = str_remove(Title, " // .*"), 
            Title = str_remove(Title, "[^[:ascii:]].*"), 
            Title = str_trim(Title)) |> 
-    filter_out(Title == "") |> 
+    filter(Title != "") |> 
     rename(
       title = Title,
       runtime = Runtime,
@@ -126,85 +113,7 @@ load_netflix_data <- function(){
 
 NETFLIX_DATA <- load_netflix_data()
 ```
-
-## Further Analysis & Tables 
-```{r}
-#| label: tbl-consistent-staples
-#| tbl-cap: "Top Consistent 'Staple' Titles Across Multiple Periods"
-#| echo: false
-#| message: false
-#| warning: false
-
-NETFLIX_DATA |>
-  group_by(title) |>
-  summarize(
-    appearances = n(),
-    avg_hours = mean(hours_viewed, na.rm = TRUE),
-    min_hours = min(hours_viewed, na.rm = TRUE),
-    sd_hours = sd(hours_viewed, na.rm = TRUE)
-  ) |>
-  filter(appearances >= 5) |> 
-  arrange(desc(min_hours)) |>
-  slice_head(n = 5) |>
-  gt() |>
-  fmt_number(columns = c(avg_hours, min_hours, sd_hours), decimals = 0) |>
-  cols_label(
-    title = "Title",
-    appearances = "Periods Appeared",
-    avg_hours = "Average Hours",
-    min_hours = "Minimum Hours",
-    sd_hours = "Std. Deviation"
-  )
-```
-
-## Shows vs. Movies 
-```{r}
-#| label: tbl-shows-vs-movies
-#| tbl-cap: "Fraction of Watch Time: Shows vs. Movies"
-#| echo: false
-#| message: false
-#| warning: false
-
-NETFLIX_DATA |>
-  mutate(
-    content_type = if_else(runtime > 240 | str_detect(title, "(?i)Season"), "TV Show", "Movie")
-  ) |>
-  group_by(period, content_type) |>
-  summarize(total_hours = sum(hours_viewed, na.rm = TRUE), .groups = "drop") |>
-  group_by(period) |>
-  mutate(fraction = total_hours / sum(total_hours)) |>
-  select(period, content_type, fraction) |>
-  pivot_wider(names_from = content_type, values_from = fraction) |>
-  gt() |>
-  fmt_percent(columns = c(`TV Show`, Movie), decimals = 1) |>
-  cols_label(period = "Period")
-```
-
-## Live Events Vs. Pre-Recorded Content
-```{r}
-#| label: tbl-live-vs-taped
-#| tbl-cap: "Performance Comparison: Live Events vs. Pre-Taped Content"
-#| echo: false
-#| message: false
-#| warning: false
-
-NETFLIX_DATA |>
-  mutate(content_format = if_else(live_event, "Live Event", "Pre-Taped")) |>
-  group_by(content_format) |>
-  summarize(
-    total_titles = n(),
-    avg_hours = mean(hours_viewed, na.rm = TRUE),
-    max_hours = max(hours_viewed, na.rm = TRUE)
-  ) |>
-  gt() |>
-  fmt_number(columns = c(avg_hours, max_hours), decimals = 0) |>
-  cols_label(
-    content_format = "Format",
-    total_titles = "Total Offerings",
-    avg_hours = "Average Viewership (Hrs)",
-    max_hours = "Top Tier Viewership (Hrs)"
-  )
-```
+The section was surprisingly challenging when doing the project. A ran into a lot of errors which made me troubleshoot the code and my RStudio was acting up for or day or two. Our goal here was to acquire the Netflix Data and take steps to improve its clarity since it has over 60K entries and almost a dozen of rows of categories. At first, as a beginner in R Coding, I made a mistake and tried to display all entries on my website (haha), which obviously ran into rendering issues and caused crashes. 
 
 ## Initial Data Exploration
 
@@ -220,10 +129,7 @@ glimpse(NETFLIX_DATA)
 skim(NETFLIX_DATA)
 ```
 
-
-
-
-After completing the EDA pass using the glimpse() and skim() I can say that the cleaned up dataset consists of 61892 rows and has a 11 columns total. Each row has a unique category, such as year, period (period start/end), title, runtime, views, hours viewed, release date, global availability, and whether or not the content was a live event or pre-taped. All in all, the data pipeline for the Netlfix report was completed successfully. 
+After completing the EDA pass using the glimpse() and skim() I can say that the cleaned up dataset consists of 61892 rows and has a 11 columns total. Each row has a unique category, such as year, period (period start/end), title, runtime, views, hours viewed, release date, global availability, and whether or not the content was a live event or pre-taped. All in all, the data pipeline for the Netflix report was completed successfully.
 
 ## Exploratory Questions & Summary Findings
 
@@ -268,29 +174,181 @@ global_by_hours <- NETFLIX_DATA |>
   summarize(frac = sum(hours_viewed * available_globally, na.rm = TRUE) / sum(hours_viewed, na.rm = TRUE)) |>
   pull(frac)
 ```
-1. What date range is covered by this data set?
 
-The Netflix engagement dataset covers the period from `r min(NETFLIX_DATA$period_start, na.rm = TRUE)` to `r max(NETFLIX_DATA$period_end, na.rm = TRUE)`.
+1. What date range is covered by this data set?
+The data range covered by the specific Netflix Data file covers `r min_date` to `r max_date`.Each one of the years accounted in the data set has 2 parts (H1 & H2)
 
 2. How many different shows and movies are covered in this data set?
-
-The dataset consists a total of `r scales::comma(num_unique_titles)` unique catalog titles.
+This data set covers a total of `r scales::comma(num_unique_titles)`. This shows that Netflix has a long catalog of media in its possession. 
 
 3. How many total hours have been spent watching shows from the Bridgerton universe?
-
-Shows from the *Bridgerton* universe generated a total `r scales::comma(bridgerton_hours)` hours of total watch time.
+The entire Bridgerton universe (Bridgerton S1-4, Bridgerton - The Afterparty, Queen Charlotte: A Bridgerton Story) made a total of `r scales::comma(bridgerton_hours)` hours.
 
 4. How many total hours have been spent watching the five seasons of Stranger Things?
-
-The 5 seasons of *Stranger Things*  resulted in `r scales::comma(stranger_things_hours)` hours viewed.
+One of the most popular shows of the last decade, Stranger Things, resulted in  `r scales::comma(stranger_things_hours)` hours watched.
 
 5. What percentage of total watch time was spent on the Top 10 titles of 2026H1?
+The top 10 titles for the first half of 2026 made up `r scales::percent(top10_2026h1_share, accuracy = 0.01)` of the total watch time.
 
-The Top 10 titles of 2026H1 made up `r scales::percent(top10_2026h1_share, accuracy = 0.01)` of all viewership during that period.
+6. What fraction of Netflix’s catalog is globally available? (Answered both by title and weighted by hours viewed)
+A decent percentage of Netflix's catalog is available. `r scales::percent(global_by_title, accuracy = 0.1)` is by title and `r scales::percent(global_by_hours, accuracy = 0.1)`is weighted by the total hours viewed.
 
-6. What fraction of Netflix’s catalog is globally available? 
+## Exploratory Questions: Table Answers
 
-Global catalog availability stands at `r scales::percent(global_by_title, accuracy = 0.1)` by total title count, which shifts to `r scales::percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
+### 1. Top Title in Each Reporting Period
+
+```{r}
+#| label: tbl-top-title-per-period
+#| tbl-cap: "Top Viewed Title in Each Semi-Annual Period"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  group_by(period) |>
+  mutate(
+    period_total_hours = sum(hours_viewed, na.rm = TRUE),
+    share_of_period = hours_viewed / period_total_hours
+  ) |>
+  slice_max(hours_viewed, n = 1, with_ties = FALSE) |>
+  ungroup() |>
+  select(period, title, hours_viewed, share_of_period) |>
+  gt() |>
+  fmt_number(columns = hours_viewed, decimals = 0) |>
+  fmt_percent(columns = share_of_period, decimals = 2) |>
+  cols_label(
+    period = "Period",
+    title = "Top Title",
+    hours_viewed = "Hours Viewed",
+    share_of_period = "Share of Total Watch Time"
+  )
+```
+
+The top titles for each of the 7 periods covered by the Netflix dataset were the following: The Night Agent: Season 1 (2023H1), King the Land: Limited Series (2023H2), Bridgerton: Season 3 (2024H1), Squid Game: Season 2 (2024H2 and 2025H1), Wednesday: Season 2 (2025H2), and lastly Bridgerton: Season 4 (2026H1). All of these titles are Netflix Originals and were offered globally, hence why the total hours viewed were skewed higher than other shows offered by Netflix. Squid Game was a global hit for Netflix and the only show that managed to see itself at the top in two separate semi-annual periods. Wednesday accumulated the highest percentage of total watch time (1.35) between the 6 shows listed. 
+
+### 2. Evolution of Netflix Catalog Size Over Time
+
+```{r}
+#| label: tbl-catalog-size-trends
+#| tbl-cap: "Netflix Catalog Size and Total Runtime Across Reporting Periods"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  group_by(period) |>
+  summarize(
+    num_titles = n(),
+    total_runtime_hours = sum(runtime, na.rm = TRUE) / 60,
+    avg_runtime_mins = mean(runtime, na.rm = TRUE),
+    total_hours_viewed = sum(hours_viewed, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  gt() |>
+  fmt_number(columns = c(num_titles, total_runtime_hours, total_hours_viewed), decimals = 0) |>
+  fmt_number(columns = avg_runtime_mins, decimals = 1) |>
+  cols_label(
+    period = "Period",
+    num_titles = "Total Catalog Titles",
+    total_runtime_hours = "Total Runtime (Hours)",
+    avg_runtime_mins = "Avg Runtime (Mins)",
+    total_hours_viewed = "Total Hours Viewed"
+  )
+```
+
+At the first half of 2023 the dataset shows that Netflix had a total of 18,196 catalog titles which resulted in the highest total hours viewed (93,407,600,000). But, in the second half of the same year we can see that the total catalog titles dropped down by a staggering 63.7% (from 18,196 titles to 6,595). Despite this big change, the total runtime(measured in hours) and average runtime (measured in minutes) steadily increased. Since the second half of 2023 Netflix has been adding more catalog titles and in the first half of 2026 it had a total of 8,187 titles, a total of 1,592 titles were added to its catalog. Let’s see if this number continues to rise in the following semi-annual periods. One thing is certain, Netflix most likely won’t reach 18K catalog titles again. Most likely, a lot of these shows didn’t get a lot of viewership and some were lost to other streaming platforms like Amazon Prime, Disney Plus, and more. 
+
+### 3. Consistent Viewership Staples
+
+```{r}
+#| label: tbl-consistent-staples
+#| tbl-cap: "Top Consistent 'Staple' Titles Across Multiple Periods"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  group_by(title) |>
+  summarize(
+    appearances = n(),
+    avg_hours = mean(hours_viewed, na.rm = TRUE),
+    min_hours = min(hours_viewed, na.rm = TRUE),
+    sd_hours = sd(hours_viewed, na.rm = TRUE)
+  ) |>
+  filter(appearances >= 5) |> 
+  arrange(desc(min_hours)) |>
+  slice_head(n = 5) |>
+  gt() |>
+  fmt_number(columns = c(avg_hours, min_hours, sd_hours), decimals = 0) |>
+  cols_label(
+    title = "Title",
+    appearances = "Periods Appeared",
+    avg_hours = "Average Hours",
+    min_hours = "Minimum Hours",
+    sd_hours = "Std. Deviation"
+  )
+```
+
+True Beauty: Limited Series, Pablo Escobar Season 1, Chiquititas, Stranger Things 4, and Suits Season 1 are Netflix’s consistent viewership staples. Unlike the top titles in each semi-annual period discussed earlier, the only Netflix original that I see in this list is Stranger Things, which made up the highest average hours (207,385,714) and the highest std. Deviation (171,675,823 )and without a doubt it’s considered Netflix’s biggest show. The other four titles were either acquired or licensed by Netflix, most of them were foreign productions and were produced a decade earlier than the first semi-annual period analyzed in this dataset. The skew of Stranger Things is also influenced by its global availability, unlike the other titles mentioned (limited to specific countries). 
+
+### 4. Shows vs. Movies Viewership Share
+
+```{r}
+#| label: tbl-shows-vs-movies
+#| tbl-cap: "Fraction of Watch Time: Shows vs. Movies"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  mutate(
+    content_type = case_when(
+      runtime > 240 | str_detect(title, "(?i)Season") ~ "TV Show",
+      !is.na(runtime) ~ "Movie",
+      TRUE ~ "Movie"
+    )
+  ) |>
+  group_by(period, content_type) |>
+  summarize(total_hours = sum(hours_viewed, na.rm = TRUE), .groups = "drop") |>
+  group_by(period) |>
+  mutate(fraction = total_hours / sum(total_hours)) |>
+  select(period, content_type, fraction) |>
+  pivot_wider(names_from = content_type, values_from = fraction, values_fill = 0) |>
+  gt() |>
+  fmt_percent(columns = c(`TV Show`, Movie), decimals = 1) |>
+  cols_label(period = "Period")
+```
+
+During the first half of 2023, movie fraction watch time competed with the fraction of TV show watch time (30.8% and 60.8% respectively. However, from the second half of 2023 we see that the % shifted towards TV shows dramatically. In the following 6 semi-annual periods covered by the dataset, TV shows have maintained a minimum 94.8% and reached a maximum of 96.5% in the second half of 2024. This sudden change was most likely influenced by the drop in total catalog size made by Netflix after the first half of 2023 and the highest TV % was definitely influenced by the success of Squid Game: Season 2. 
+
+### 5. Live Events vs. Pre-Recorded Content
+
+```{r}
+#| label: tbl-live-vs-taped
+#| tbl-cap: "Performance Comparison: Live Events vs. Pre-Taped Content"
+#| echo: false
+#| message: false
+#| warning: false
+
+NETFLIX_DATA |>
+  mutate(content_format = if_else(live_event, "Live Event", "Pre-Taped")) |>
+  group_by(content_format) |>
+  summarize(
+    total_titles = n(),
+    avg_hours = mean(hours_viewed, na.rm = TRUE),
+    max_hours = max(hours_viewed, na.rm = TRUE)
+  ) |>
+  gt() |>
+  fmt_number(columns = c(avg_hours, max_hours), decimals = 0) |>
+  cols_label(
+    content_format = "Format",
+    total_titles = "Total Offerings",
+    avg_hours = "Average Viewership (Hrs)",
+    max_hours = "Top Tier Viewership (Hrs)"
+  )
+```
+
+The data we have for live events and pre-recorded content in a 7 semi-annual period window shows us that Netflix pre-recorded content (movies, TV shows, documentaries, etc.) make up 99.5% of the total content found in the streaming platform. Live entries are a new addition to streaming platforms like Netflix, and Amazon Prime (acquired NBA rights). Platforms like Paramount+ and Peacock include TV channels and live broadcasting so their total offerings and viewership are higher than Netflix. Netflix entered the live event offering era with the acquisition of WWE’s Monday Night Raw back in January of 2025 (love wrestling). Netflix also broadcasts WWE’s PPVs , but not in the US. ESPN has gained the rights to broadcast PPVs in the US, on the other hand, these PPVs can be accessed through Netflix in other countries around the world. Netflix doesn’t offer many live events for now, but it’s still quite new to this. It will definitely secure rights for boxing matches, perhaps soccer/football matches and more. Such live events will bring in a lot of people. 
 
 ## Platform Strategy Memo
 
@@ -300,7 +358,6 @@ Global catalog availability stands at `r scales::percent(global_by_title, accura
 #| message: false
 #| warning: false
 
-# Supporting metrics for your 750-word memo (use these inline with `r ...` so nothing is hard-coded!)
 tv_movie_summary <- NETFLIX_DATA |>
   mutate(is_show = (!is.na(runtime) & runtime > 240) | str_detect(title, "(?i)Season")) |>
   summarize(
@@ -331,9 +388,14 @@ live_avg_hours <- NETFLIX_DATA |> filter(live_event) |> summarize(m = mean(hours
 taped_avg_hours <- NETFLIX_DATA |> filter(!live_event) |> summarize(m = mean(hours_viewed, na.rm = TRUE)) |> pull(m)
 ```
 
+Dear Netflix executives, I hope this memo finds you well. After acquiring and breaking down a dataset for Netflix that covered data from the first half of 2023 up to the first half of 2026. This seven semi-annual time window gave us a lot of insight regarding the company’s trajectory  and numbers., especially important statistics like runtime, views, and hours viewed. Taking a look at the data provided, I can confidently say that the decision to cut down the total title catalog from 18,162 from 2023’s first half to 6,595 in 2023’s second half was successful. A lot of titles in the catalog did not gather much attraction and viewership and were rightfully taken out of the platform. This 63.7% cut down resulted in cutting off dead weight and saving costs of licenses for shows that weren’t game changes for our revenue. On a very positive note, this cut down had very quick effects on the total runtime increased by 14.64%! In terms of the long term numbers, from the second half to the last semi-annual period covered by the dataset, total runtime increased by another 25.42%! The catalog may have increased by 24.14% ( 6,595 to 8,187 ), however, it shows us that the titles acquired during that period had a positive effect on viewership and engagement. A huge catalog will consist of titles that the average viewer may not know or won’t bother taking a look at. It’s always important to prioritize tactics that will maximize our revenue and limit our costs. Now, let’s move on to our most important asset, our Netflix Original productions. After breaking down the data provided, our top 5 titles in terms of total % viewer watch time were all Netflix originals. The Night Agent: Season 1 that topped the first half of 2023 had the lowest total watch time percentage with 0.87. The huge catalog that Netflix had at the time may have skewed its percentage negatively. I’m making this observation because when the catalog size was cut down, the hourly views increased by 18.72% between 2023’s Night Agent: Season 1 (812,100,000 hours ) and Wednesday: Season 2 (964,100,000 hours). We want our viewers to see what makes us different compared to the rest of the competition. Exclusive content is what makes us stand out and our recent TV shows were all major hits. From Bridgerton, Squid Game, Wednesday, and especially the global phenomenon Stranger Things. These statistics also show us that we should invest in more TV shows rather than movies. 30.8 % of the total catalog during the first half of 2023 were made up of movies. That number dropped to 4.2% by the second half of 2023. Despite this drastic change in numbers, Netflix’s engagement increased. I’m sorry to say this, but movies are not our thing. Sure, we can invest in movies like The Irishman, a production with heavy hitter protagonists and a highly acclaimed producer like Martin Scorsese from time to time, but the majority of our movie productions have proven to be flops. As part of our strategy, we should allocate our budget towards TV shows which have proven to make us stand out in the market. Competitors like Disney have the upper hand when it comes to movies because they usually release movies in cinemas before moving them to their streaming platform. Their history with the box office has lasted for almost a century and it would be hard to compete with them as they have developed a stronger bond with their audience when it comes to movie productions. If we decide to invest more money into our movie productions and catalog, we can try to spend money and buy franchises (which would cost us a lot of money) just like Disney did with Star Wars and Marvel. Although this could be an option, the risk is much greater. We should instead take advantage of our successful TV show productions, and make investments there as they are offered globally. The One Piece live-action has shown great numbers so far and brings more people to our platform. Lastly, I would like to discuss our limited live event offerings. I think that the decision the company took to make a deal with the WWE and acquire the rights to Monday Night Raw and its PLEs (unfortunately not available in the US audience). Wrestling has a big audience in the United States and the move was great, but I think that the total percentage of live events is quite low at 0.5 compared to our pre-taped content like TV shows, movies, documentaries and more. We had a total of 310 live offerings in these seven semi-annual windows and the majority of it came from WWE tapings. Although certain boxing events and comedy shows did good numbers, we should try to get the rights to more sports broadcasts. Amazon recently acquired NBa rights, Paramount made a deal with the UFC and UEFA Champions League. ESPN has the domestic rights to WWE PLEs. There is money to be made in sports broadcasting, especially soccer which has a huge audience across the globe. Peacock has the rights to the Premier League which attracts the biggest audience out of the global soccer leagues. We should invest more capital in live event offerings. All in all, I would like to thank the Netflix executive board for taking my platform strategy memo into consideration for the upcoming year. I strongly believe that our exclusive TV show productions is what makes us stand out in the market and has positioned us in the top of the streaming industry. Going forward, we should focus on our exclusive TV shows and increase our live event offering catalog to attract more people. Cheers to a productive and successful 2027!
+
+
+Konstantinos Gkanas 
+
 
 ::: {.callout-note collapse="true"}
 ## AI Usage Statement
 
-Generative AI (Google Gemini) was used in this mini-project to assist with debugging R `tidyverse` pipelines, formatting `gt` tables, and customizing CSS styling for the Quarto document. All narrative text, analysis interpretation, and the Platform Strategy Memo were written entirely by the author without AI text generation, in accordance with STA 9750 course policies.
+In accordance with course guidelines,  Google Gemini Flash-Lite was utilized as an interactive programming collaborator throughout the development of this project.All of the writing, analysis, and final strategy memo were completed in my own words.  
 :::

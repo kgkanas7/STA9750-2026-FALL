@@ -54,5 +54,12 @@
     "title": "Mini-Project #01: What We Watched",
     "section": "Platform Strategy Memo",
     "text": "Platform Strategy Memo\nRemember to plug in the inline variables above instead of typing numbers manually: - TV show share of total hours: 90.6% vs. Movie share: 9.4% - Catalog growth from 2023H1 (18,196 titles; 93,407,600,000 hours viewed) to 2026H1 (8,187 titles; 74,333,600,000 hours viewed) - Global availability share of watch time from 2023H1 (51.5%) to 2026H1 (48.6%) - Live event average viewership (3,560,000 hours) vs. Pre-taped average viewership (8,289,547 hours)]\n\n\n\n\n\n\nNoteAI Usage Statement\n\n\n\n\n\nGenerative AI (Google Gemini) was used in this mini-project to assist with debugging R tidyverse pipelines, formatting gt tables, and customizing CSS styling for the Quarto document. All narrative text, analysis interpretation, and the Platform Strategy Memo were written entirely by the author without AI text generation, in accordance with STA 9750 course policies."
+  },
+  {
+    "objectID": "mp01.html#exploratory-questions-summary-findings-1",
+    "href": "mp01.html#exploratory-questions-summary-findings-1",
+    "title": "Mini-Project #01: What We Watched",
+    "section": "Exploratory Questions & Summary Findings",
+    "text": "Exploratory Questions & Summary Findings"
   }
 ]

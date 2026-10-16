@@ -228,6 +228,8 @@ After completing the EDA pass using the glimpse() and skim() I can say that the 
 
 ## Exploratory Questions & Summary Findings
 
+## Exploratory Questions & Summary Findings
+
 ```{r}
 #| label: task5-inline-calcs
 #| echo: false
@@ -276,7 +278,6 @@ global_by_hours <- NETFLIX_DATA |>
   summarize(frac = sum(hours_viewed * available_globally, na.rm = TRUE) / sum(hours_viewed, na.rm = TRUE)) |>
   pull(frac)
 ```
-
 
 
 # Additional Exploratory Tables 

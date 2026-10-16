@@ -221,9 +221,12 @@ glimpse(NETFLIX_DATA)
 skim(NETFLIX_DATA)
 ```
 
+
+
+
 After completing the EDA pass using the glimpse() and skim() I can say that the cleaned up dataset consists of 61892 rows and has a 11 columns total. Each row has a unique category, such as year, period (period start/end), title, runtime, views, hours viewed, release date, global availability, and whether or not the content was a live event or pre-taped. All in all, the data pipeline for the Netlfix report was completed successfully. 
 
-# Exploratory Questions (Inline Values)
+
 
 ```{r}
 #| label: task5-inline-calcs
@@ -283,7 +286,7 @@ An analysis of the Netflix engagement data reveals several key behavioral patter
 * **Top-Tier Concentration:** The Top 10 titles alone accounted for `r percent(top10_2026h1_share, accuracy = 0.01)` of all watch time in 2026H1.
 * **Global Reach:** Approximately `r percent(global_by_title, accuracy = 0.1)` of titles are available globally, which expands to `r percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
 
-# Additional Exploratory Tables (Task 6 Q1 & Q2)
+# Additional Exploratory Tables 
 
 ### Top Title in Each Reporting Period
 
@@ -383,12 +386,6 @@ live_avg_hours <- NETFLIX_DATA |> filter(live_event) |> summarize(m = mean(hours
 taped_avg_hours <- NETFLIX_DATA |> filter(!live_event) |> summarize(m = mean(hours_viewed, na.rm = TRUE)) |> pull(m)
 ```
 
-## Platform Strategy Memo 
-Remember to plug in the inline variables above instead of typing numbers manually:
-- TV show share of total hours: `r memo_tv_share` vs. Movie share: `r memo_movie_share`
-- Catalog growth from 2023H1 (`r comma(titles_2023h1)` titles; `r comma(hours_2023h1)` hours viewed) to 2026H1 (`r comma(titles_2026h1)` titles; `r comma(hours_2026h1)` hours viewed)
-- Global availability share of watch time from 2023H1 (`r global_share_2023h1`) to 2026H1 (`r global_share_2026h1`)
-- Live event average viewership (`r comma(live_avg_hours)` hours) vs. Pre-taped average viewership (`r comma(taped_avg_hours)` hours)]
 
 ::: {.callout-note collapse="true"}
 ## AI Usage Statement

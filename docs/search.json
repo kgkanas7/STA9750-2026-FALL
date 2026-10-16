@@ -46,7 +46,7 @@
     "href": "mp01.html#exploratory-questions-summary-findings",
     "title": "Mini-Project #01: What We Watched",
     "section": "Exploratory Questions & Summary Findings",
-    "text": "Exploratory Questions & Summary Findings"
+    "text": "Exploratory Questions & Summary Findings\n\nWhat date range is covered by this data set? The Netflix engagement dataset covers the period from 2023-01-01 to 2026-06-30.\nHow many different shows and movies are covered in this data set? The dataset encompasses a total of 24,427 unique catalog titles.\nHow many total hours have been spent watching shows from the Bridgerton universe? Shows from the Bridgerton universe generated a massive 4,862,800,000 hours of total watch time.\nHow many total hours have been spent watching the five seasons of Stranger Things? The five main seasons of Stranger Things (excluding companion content and spin-offs) accounted for 5,588,900,000 hours viewed.\nWhat percentage of total watch time was spent on the Top 10 titles of 2026H1? The Top 10 titles of 2026H1 alone represented 6.70% of all viewership during that period.\nWhat fraction of Netflix’s catalog is globally available? (Answered both by title and weighted by hours viewed) Global catalog availability stands at 35.1% by total title count, which shifts to 51.9% when weighted by total hours viewed."
   },
   {
     "objectID": "mp01.html#platform-strategy-memo-1",

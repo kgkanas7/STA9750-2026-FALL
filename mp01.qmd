@@ -228,8 +228,6 @@ After completing the EDA pass using the glimpse() and skim() I can say that the 
 
 ## Exploratory Questions & Summary Findings
 
-## Exploratory Questions & Summary Findings
-
 ```{r}
 #| label: task5-inline-calcs
 #| echo: false
@@ -239,20 +237,15 @@ After completing the EDA pass using the glimpse() and skim() I can say that the 
 library(stringr)
 library(scales)
 
-# Q1: Date range covered by the dataset
 min_date <- min(NETFLIX_DATA$period_start, na.rm = TRUE)
 max_date <- max(NETFLIX_DATA$period_end, na.rm = TRUE)
-
-# Q2: Number of different shows and movies (unique titles)
 num_unique_titles <- n_distinct(NETFLIX_DATA$title)
 
-# Q3: Total hours spent watching shows from the Bridgerton universe
 bridgerton_hours <- NETFLIX_DATA |>
   filter(str_detect(title, "Bridgerton")) |>
   summarize(total = sum(hours_viewed, na.rm = TRUE)) |>
   pull(total)
 
-# Q4: Total hours watching the 5 seasons of Stranger Things
 stranger_things_hours <- NETFLIX_DATA |>
   filter(str_detect(title, "Stranger Things")) |>
   filter(!str_detect(title, "Beyond Stranger Things")) |>
@@ -261,7 +254,6 @@ stranger_things_hours <- NETFLIX_DATA |>
   summarize(total = sum(hours_viewed, na.rm = TRUE)) |>
   pull(total)
 
-# Q5: Percentage of total watch time spent on the Top 10 titles of 2026H1
 top10_2026h1_share <- NETFLIX_DATA |>
   filter(period == "2026H1") |>
   mutate(total_period_hours = sum(hours_viewed, na.rm = TRUE)) |>
@@ -269,7 +261,6 @@ top10_2026h1_share <- NETFLIX_DATA |>
   summarize(top10_share = sum(hours_viewed) / first(total_period_hours)) |>
   pull(top10_share)
 
-# Q6: Fraction of Netflix's catalog globally available (by title and weighted by hours viewed)
 global_by_title <- NETFLIX_DATA |>
   summarize(frac = mean(available_globally, na.rm = TRUE)) |>
   pull(frac)
@@ -278,68 +269,23 @@ global_by_hours <- NETFLIX_DATA |>
   summarize(frac = sum(hours_viewed * available_globally, na.rm = TRUE) / sum(hours_viewed, na.rm = TRUE)) |>
   pull(frac)
 ```
+1. What date range is covered by this data set?
+The Netflix engagement dataset covers the period from `r min(NETFLIX_DATA$period_start, na.rm = TRUE)` to `r max(NETFLIX_DATA$period_end, na.rm = TRUE)`.
 
+2. How many different shows and movies are covered in this data set?
+The dataset encompasses a total of `r scales::comma(num_unique_titles)` unique catalog titles.
 
-# Additional Exploratory Tables 
+3. How many total hours have been spent watching shows from the Bridgerton universe?
+Shows from the *Bridgerton* universe generated a massive `r scales::comma(bridgerton_hours)` hours of total watch time.
 
-### Top Title in Each Reporting Period
+4. How many total hours have been spent watching the five seasons of Stranger Things?
+The five main seasons of *Stranger Things* (excluding companion content and spin-offs) accounted for `r scales::comma(stranger_things_hours)` hours viewed.
 
-```{r}
-#| label: tbl-top-title-per-period
-#| tbl-cap: "Top Viewed Title in Each Semi-Annual Period"
-#| echo: false
-#| message: false
-#| warning: false
+5. What percentage of total watch time was spent on the Top 10 titles of 2026H1?
+The Top 10 titles of 2026H1 alone represented `r scales::percent(top10_2026h1_share, accuracy = 0.01)` of all viewership during that period.
 
-NETFLIX_DATA |>
-  group_by(period) |>
-  mutate(
-    period_total_hours = sum(hours_viewed, na.rm = TRUE),
-    share_of_period = hours_viewed / period_total_hours
-  ) |>
-  slice_max(hours_viewed, n = 1, with_ties = FALSE) |>
-  ungroup() |>
-  select(period, title, hours_viewed, share_of_period) |>
-  gt() |>
-  fmt_number(columns = hours_viewed, decimals = 0) |>
-  fmt_percent(columns = share_of_period, decimals = 2) |>
-  cols_label(
-    period = "Period",
-    title = "Top Title",
-    hours_viewed = "Hours Viewed",
-    share_of_period = "Share of Total Watch Time"
-  )
-```
-
-### Evolution of Netflix Catalog Size Over Time
-
-```{r}
-#| label: tbl-catalog-size-trends
-#| tbl-cap: "Netflix Catalog Size and Total Runtime Across Reporting Periods"
-#| echo: false
-#| message: false
-#| warning: false
-
-NETFLIX_DATA |>
-  group_by(period) |>
-  summarize(
-    num_titles = n(),
-    total_runtime_hours = sum(runtime, na.rm = TRUE) / 60,
-    avg_runtime_mins = mean(runtime, na.rm = TRUE),
-    total_hours_viewed = sum(hours_viewed, na.rm = TRUE),
-    .groups = "drop"
-  ) |>
-  gt() |>
-  fmt_number(columns = c(num_titles, total_runtime_hours, total_hours_viewed), decimals = 0) |>
-  fmt_number(columns = avg_runtime_mins, decimals = 1) |>
-  cols_label(
-    period = "Period",
-    num_titles = "Total Catalog Titles",
-    total_runtime_hours = "Total Runtime (Hours)",
-    avg_runtime_mins = "Avg Runtime (Mins)",
-    total_hours_viewed = "Total Hours Viewed"
-  )
-```
+6. What fraction of Netflix’s catalog is globally available? (Answered both by title and weighted by hours viewed)
+Global catalog availability stands at `r scales::percent(global_by_title, accuracy = 0.1)` by total title count, which shifts to `r scales::percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
 
 # Platform Strategy Memo
 

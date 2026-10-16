@@ -269,21 +269,27 @@ global_by_hours <- NETFLIX_DATA |>
   pull(frac)
 ```
 1. What date range is covered by this data set?
+
 The Netflix engagement dataset covers the period from `r min(NETFLIX_DATA$period_start, na.rm = TRUE)` to `r max(NETFLIX_DATA$period_end, na.rm = TRUE)`.
 
 2. How many different shows and movies are covered in this data set?
-The dataset encompasses a total of `r scales::comma(num_unique_titles)` unique catalog titles.
+
+The dataset consists a total of `r scales::comma(num_unique_titles)` unique catalog titles.
 
 3. How many total hours have been spent watching shows from the Bridgerton universe?
-Shows from the *Bridgerton* universe generated a massive `r scales::comma(bridgerton_hours)` hours of total watch time.
+
+Shows from the *Bridgerton* universe generated a total `r scales::comma(bridgerton_hours)` hours of total watch time.
 
 4. How many total hours have been spent watching the five seasons of Stranger Things?
-The five main seasons of *Stranger Things* (excluding companion content and spin-offs) accounted for `r scales::comma(stranger_things_hours)` hours viewed.
+
+The 5 seasons of *Stranger Things*  resulted in `r scales::comma(stranger_things_hours)` hours viewed.
 
 5. What percentage of total watch time was spent on the Top 10 titles of 2026H1?
-The Top 10 titles of 2026H1 alone represented `r scales::percent(top10_2026h1_share, accuracy = 0.01)` of all viewership during that period.
 
-6. What fraction of Netflix’s catalog is globally available? (Answered both by title and weighted by hours viewed)
+The Top 10 titles of 2026H1 made up `r scales::percent(top10_2026h1_share, accuracy = 0.01)` of all viewership during that period.
+
+6. What fraction of Netflix’s catalog is globally available? 
+
 Global catalog availability stands at `r scales::percent(global_by_title, accuracy = 0.1)` by total title count, which shifts to `r scales::percent(global_by_hours, accuracy = 0.1)` when weighted by total hours viewed.
 
 ## Platform Strategy Memo

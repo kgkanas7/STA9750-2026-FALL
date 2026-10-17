@@ -1,0 +1,34 @@
+{css, echo=FALSE}
+/* Netflix Red Accent Styling */
+body {
+    background-color: #141414 !important;
+    color: #ffffff !important;
+}
+
+a {
+    color: #E50914 !important;
+}
+
+/* Make only the main page title extra large and bold */
+.title {
+    font-size: 2.8rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    border-bottom: 3px solid #E50914 !important;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+/* Apply red bottom border to all headings from h2 down to h7 */
+h2, h3, h4, h5, h6, h7 {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    border-bottom: 2px solid #E50914;
+    padding-bottom: 5px;
+    margin-top: 35px;
+}
+
+.callout.callout-note {
+    background-color: #1f1f1f !important;
+    border-left: 5px solid #E50914 !important;
+}

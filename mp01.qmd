@@ -120,8 +120,10 @@ The section was surprisingly challenging when doing the project. A ran into a lo
 
 ```{r}
 #| label: task4-eda-pass
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 library(dplyr)
 library(skimr)
@@ -136,9 +138,10 @@ After completing the EDA pass using the glimpse() and skim() I can say that the 
 
 ```{r}
 #| label: task5-inline-calcs
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 library(stringr)
 library(scales)
@@ -201,9 +204,10 @@ A decent percentage of Netflix's catalog is available. `r scales::percent(global
 ```{r}
 #| label: tbl-top-title-per-period
 #| tbl-cap: "Top Viewed Title in Each Semi-Annual Period"
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 NETFLIX_DATA |>
   group_by(period) |>
@@ -232,9 +236,10 @@ The top titles for each of the 7 periods covered by the Netflix dataset were the
 ```{r}
 #| label: tbl-catalog-size-trends
 #| tbl-cap: "Netflix Catalog Size and Total Runtime Across Reporting Periods"
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 NETFLIX_DATA |>
   group_by(period) |>
@@ -264,9 +269,10 @@ At the first half of 2023 the dataset shows that Netflix had a total of 18,196 c
 ```{r}
 #| label: tbl-consistent-staples
 #| tbl-cap: "Top Consistent 'Staple' Titles Across Multiple Periods"
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 NETFLIX_DATA |>
   group_by(title) |>
@@ -297,9 +303,10 @@ True Beauty: Limited Series, Pablo Escobar Season 1, Chiquititas, Stranger Thing
 ```{r}
 #| label: tbl-shows-vs-movies
 #| tbl-cap: "Fraction of Watch Time: Shows vs. Movies"
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 NETFLIX_DATA |>
   mutate(
@@ -327,10 +334,10 @@ During the first half of 2023, movie fraction watch time competed with the fract
 ```{r}
 #| label: tbl-live-vs-taped
 #| tbl-cap: "Performance Comparison: Live Events vs. Pre-Taped Content"
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
-
+#| code-fold: true
 NETFLIX_DATA |>
   mutate(content_format = if_else(live_event, "Live Event", "Pre-Taped")) |>
   group_by(content_format) |>
@@ -355,9 +362,10 @@ The data we have for live events and pre-recorded content in a 7 semi-annual per
 
 ```{r}
 #| label: memo-supporting-calcs
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
+#| code-fold: true
 
 tv_movie_summary <- NETFLIX_DATA |>
   mutate(is_show = (!is.na(runtime) & runtime > 240) | str_detect(title, "(?i)Season")) |>

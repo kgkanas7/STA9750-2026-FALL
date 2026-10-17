@@ -249,15 +249,77 @@ h2, h3, h4, h5, h6, h7 {
 </div>
 <section id="data-acquisition-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-acquisition-cleaning">Data Acquisition &amp; Cleaning</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fs)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>load_netflix_data <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  data_dir <span class="ot">&lt;-</span> <span class="fu">path</span>(<span class="st">"data"</span>, <span class="st">"mp01"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir_exists</span>(data_dir)){</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dir_create</span>(data_dir, <span class="at">showWarnings=</span><span class="cn">FALSE</span>, <span class="at">recurse=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  periods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2023H1"</span>, <span class="st">"2023H2"</span>, <span class="st">"2024H1"</span>, <span class="st">"2024H2"</span>, <span class="st">"2025H1"</span>, <span class="st">"2025H2"</span>, <span class="st">"2026H1"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  file_paths <span class="ot">&lt;-</span> <span class="fu">path</span>(data_dir, <span class="fu">paste0</span>(periods, <span class="st">".xlsx"</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Read directly from local files to avoid web scraping/network errors</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">period =</span> periods, <span class="at">path =</span> file_paths) <span class="sc">|&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> <span class="fu">map</span>(path, read_excel, <span class="at">skip =</span> <span class="dv">3</span>, <span class="at">na =</span> <span class="st">"*"</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> <span class="fu">map</span>(data, \(x) x <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Release Date</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.Date</span>(<span class="st">`</span><span class="at">Release Date</span><span class="st">`</span>)))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>path) <span class="sc">|&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(data) <span class="sc">|&gt;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_sub</span>(period, <span class="dv">1</span>, <span class="dv">4</span>), </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">half =</span> <span class="fu">str_sub</span>(period, <span class="at">start =</span> <span class="dv">6</span>), </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">period_start =</span> <span class="fu">make_date</span>(year, <span class="fu">if_else</span>(half <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">7</span>), <span class="dv">1</span>), </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">period_end =</span> <span class="fu">make_date</span>(year, <span class="fu">if_else</span>(half <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">12</span>), <span class="fu">if_else</span>(half <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">31</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">Hours Viewed</span><span class="st">`</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">live_event =</span> <span class="sc">!</span><span class="fu">is.na</span>(Runtime) <span class="sc">&amp;</span> <span class="fu">str_detect</span>(Runtime, <span class="st">"</span><span class="sc">\\</span><span class="st">d+:</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">*"</span>), </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">clean_time =</span> <span class="fu">str_remove</span>(Runtime, <span class="fu">fixed</span>(<span class="st">"*"</span>)),</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">Runtime =</span> <span class="dv">60</span> <span class="sc">*</span> <span class="fu">hour</span>(<span class="fu">hm</span>(clean_time)) <span class="sc">+</span> <span class="fu">minute</span>(<span class="fu">hm</span>(clean_time))) <span class="sc">|&gt;</span> </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>clean_time) <span class="sc">|&gt;</span> </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Runtime =</span> <span class="fu">coalesce</span>(Runtime, <span class="fu">mean</span>(Runtime, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">.by =</span> Title, </span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>           <span class="at">Title =</span> stringi<span class="sc">::</span><span class="fu">stri_trans_general</span>(Title, <span class="st">"Latin-ASCII"</span>),</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>           <span class="at">Title =</span> <span class="fu">str_remove</span>(Title, <span class="st">" // .*"</span>), </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">Title =</span> <span class="fu">str_remove</span>(Title, <span class="st">"[^[:ascii:]].*"</span>), </span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">Title =</span> <span class="fu">str_trim</span>(Title)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Title <span class="sc">!=</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> Title,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">runtime =</span> Runtime,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">views =</span> Views,</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">hours_viewed =</span> <span class="st">`</span><span class="at">Hours Viewed</span><span class="st">`</span>,</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">release_date =</span> <span class="st">`</span><span class="at">Release Date</span><span class="st">`</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">available_globally =</span> <span class="st">`</span><span class="at">Available Globally?</span><span class="st">`</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">year =</span> <span class="fu">as.integer</span>(year),</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">available_globally =</span> (available_globally <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, period, period_start, period_end, title, runtime, views, </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>           hours_viewed, release_date, available_globally, live_event)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>NETFLIX_DATA <span class="ot">&lt;-</span> <span class="fu">load_netflix_data</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 <p>The section was surprisingly challenging when doing the project. A ran into a lot of errors which made me troubleshoot the code and my RStudio was acting up for or day or two. Our goal here was to acquire the Netflix Data and take steps to improve its clarity since it has over 60K entries and almost a dozen of rows of categories. At first, as a beginner in R Coding, I made a mistake and tried to display all entries on my website (haha), which obviously ran into rendering issues and caused crashes.</p>
 </section>
 <section id="initial-data-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="initial-data-exploration">Initial Data Exploration</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(NETFLIX_DATA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(NETFLIX_DATA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 61,892
 Columns: 11
@@ -273,7 +335,7 @@ $ release_date       &lt;date&gt; 2023-03-23, 2023-01-05, 2022-12-30, 2022-11-23
 $ available_globally &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TR…
 $ live_event         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FA…</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(NETFLIX_DATA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(NETFLIX_DATA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -570,23 +632,23 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
 </figcaption>
 <div aria-describedby="tbl-top-title-per-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="xfuvfikwbb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xfuvfikwbb table {
+<div id="knddejoutr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#knddejoutr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xfuvfikwbb thead, #xfuvfikwbb tbody, #xfuvfikwbb tfoot, #xfuvfikwbb tr, #xfuvfikwbb td, #xfuvfikwbb th {
+#knddejoutr thead, #knddejoutr tbody, #knddejoutr tfoot, #knddejoutr tr, #knddejoutr td, #knddejoutr th {
   border-style: none;
 }
 
-#xfuvfikwbb p {
+#knddejoutr p {
   margin: 0;
   padding: 0;
 }
 
-#xfuvfikwbb .gt_table {
+#knddejoutr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -612,12 +674,12 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-left-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_caption {
+#knddejoutr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xfuvfikwbb .gt_title {
+#knddejoutr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -629,7 +691,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-bottom-width: 0;
 }
 
-#xfuvfikwbb .gt_subtitle {
+#knddejoutr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -641,7 +703,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-top-width: 0;
 }
 
-#xfuvfikwbb .gt_heading {
+#knddejoutr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -653,13 +715,13 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_bottom_border {
+#knddejoutr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_col_headings {
+#knddejoutr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -674,7 +736,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_col_heading {
+#knddejoutr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -694,7 +756,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   overflow-x: hidden;
 }
 
-#xfuvfikwbb .gt_column_spanner_outer {
+#knddejoutr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -706,15 +768,15 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   padding-right: 4px;
 }
 
-#xfuvfikwbb .gt_column_spanner_outer:first-child {
+#knddejoutr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xfuvfikwbb .gt_column_spanner_outer:last-child {
+#knddejoutr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xfuvfikwbb .gt_column_spanner {
+#knddejoutr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -726,11 +788,11 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   width: 100%;
 }
 
-#xfuvfikwbb .gt_spanner_row {
+#knddejoutr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xfuvfikwbb .gt_group_heading {
+#knddejoutr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -756,7 +818,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   text-align: left;
 }
 
-#xfuvfikwbb .gt_empty_group_heading {
+#knddejoutr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -771,15 +833,15 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   vertical-align: middle;
 }
 
-#xfuvfikwbb .gt_from_md > :first-child {
+#knddejoutr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xfuvfikwbb .gt_from_md > :last-child {
+#knddejoutr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xfuvfikwbb .gt_row {
+#knddejoutr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -798,7 +860,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   overflow-x: hidden;
 }
 
-#xfuvfikwbb .gt_stub {
+#knddejoutr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -811,7 +873,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#xfuvfikwbb .gt_stub_row_group {
+#knddejoutr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -825,15 +887,15 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   vertical-align: top;
 }
 
-#xfuvfikwbb .gt_row_group_first td {
+#knddejoutr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xfuvfikwbb .gt_row_group_first th {
+#knddejoutr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xfuvfikwbb .gt_summary_row {
+#knddejoutr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -843,16 +905,16 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#xfuvfikwbb .gt_first_summary_row {
+#knddejoutr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_first_summary_row.thick {
+#knddejoutr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xfuvfikwbb .gt_last_summary_row {
+#knddejoutr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -862,7 +924,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-bottom-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_grand_summary_row {
+#knddejoutr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -872,7 +934,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#xfuvfikwbb .gt_first_grand_summary_row {
+#knddejoutr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -882,7 +944,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-top-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_last_grand_summary_row_top {
+#knddejoutr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -892,11 +954,11 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-bottom-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_striped {
+#knddejoutr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xfuvfikwbb .gt_table_body {
+#knddejoutr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -905,7 +967,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-bottom-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_footnotes {
+#knddejoutr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -919,7 +981,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_footnote {
+#knddejoutr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -928,7 +990,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#xfuvfikwbb .gt_sourcenotes {
+#knddejoutr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -942,7 +1004,7 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   border-right-color: #D3D3D3;
 }
 
-#xfuvfikwbb .gt_sourcenote {
+#knddejoutr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -950,72 +1012,72 @@ Table&nbsp;1: Top Viewed Title in Each Semi-Annual Period
   padding-right: 5px;
 }
 
-#xfuvfikwbb .gt_left {
+#knddejoutr .gt_left {
   text-align: left;
 }
 
-#xfuvfikwbb .gt_center {
+#knddejoutr .gt_center {
   text-align: center;
 }
 
-#xfuvfikwbb .gt_right {
+#knddejoutr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xfuvfikwbb .gt_font_normal {
+#knddejoutr .gt_font_normal {
   font-weight: normal;
 }
 
-#xfuvfikwbb .gt_font_bold {
+#knddejoutr .gt_font_bold {
   font-weight: bold;
 }
 
-#xfuvfikwbb .gt_font_italic {
+#knddejoutr .gt_font_italic {
   font-style: italic;
 }
 
-#xfuvfikwbb .gt_super {
+#knddejoutr .gt_super {
   font-size: 65%;
 }
 
-#xfuvfikwbb .gt_footnote_marks {
+#knddejoutr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xfuvfikwbb .gt_asterisk {
+#knddejoutr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xfuvfikwbb .gt_indent_1 {
+#knddejoutr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xfuvfikwbb .gt_indent_2 {
+#knddejoutr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xfuvfikwbb .gt_indent_3 {
+#knddejoutr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xfuvfikwbb .gt_indent_4 {
+#knddejoutr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xfuvfikwbb .gt_indent_5 {
+#knddejoutr .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xfuvfikwbb .katex-display {
+#knddejoutr .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xfuvfikwbb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#knddejoutr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1093,23 +1155,23 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
 </figcaption>
 <div aria-describedby="tbl-catalog-size-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="sheudhhfxy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sheudhhfxy table {
+<div id="jfipmjgogk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jfipmjgogk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sheudhhfxy thead, #sheudhhfxy tbody, #sheudhhfxy tfoot, #sheudhhfxy tr, #sheudhhfxy td, #sheudhhfxy th {
+#jfipmjgogk thead, #jfipmjgogk tbody, #jfipmjgogk tfoot, #jfipmjgogk tr, #jfipmjgogk td, #jfipmjgogk th {
   border-style: none;
 }
 
-#sheudhhfxy p {
+#jfipmjgogk p {
   margin: 0;
   padding: 0;
 }
 
-#sheudhhfxy .gt_table {
+#jfipmjgogk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1135,12 +1197,12 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-left-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_caption {
+#jfipmjgogk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sheudhhfxy .gt_title {
+#jfipmjgogk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1152,7 +1214,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-width: 0;
 }
 
-#sheudhhfxy .gt_subtitle {
+#jfipmjgogk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1164,7 +1226,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-top-width: 0;
 }
 
-#sheudhhfxy .gt_heading {
+#jfipmjgogk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1176,13 +1238,13 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_bottom_border {
+#jfipmjgogk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_col_headings {
+#jfipmjgogk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1197,7 +1259,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_col_heading {
+#jfipmjgogk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1217,7 +1279,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   overflow-x: hidden;
 }
 
-#sheudhhfxy .gt_column_spanner_outer {
+#jfipmjgogk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1229,15 +1291,15 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 4px;
 }
 
-#sheudhhfxy .gt_column_spanner_outer:first-child {
+#jfipmjgogk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sheudhhfxy .gt_column_spanner_outer:last-child {
+#jfipmjgogk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sheudhhfxy .gt_column_spanner {
+#jfipmjgogk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1249,11 +1311,11 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   width: 100%;
 }
 
-#sheudhhfxy .gt_spanner_row {
+#jfipmjgogk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sheudhhfxy .gt_group_heading {
+#jfipmjgogk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1279,7 +1341,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   text-align: left;
 }
 
-#sheudhhfxy .gt_empty_group_heading {
+#jfipmjgogk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1294,15 +1356,15 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   vertical-align: middle;
 }
 
-#sheudhhfxy .gt_from_md > :first-child {
+#jfipmjgogk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sheudhhfxy .gt_from_md > :last-child {
+#jfipmjgogk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sheudhhfxy .gt_row {
+#jfipmjgogk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1321,7 +1383,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   overflow-x: hidden;
 }
 
-#sheudhhfxy .gt_stub {
+#jfipmjgogk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1334,7 +1396,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#sheudhhfxy .gt_stub_row_group {
+#jfipmjgogk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1348,15 +1410,15 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   vertical-align: top;
 }
 
-#sheudhhfxy .gt_row_group_first td {
+#jfipmjgogk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sheudhhfxy .gt_row_group_first th {
+#jfipmjgogk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sheudhhfxy .gt_summary_row {
+#jfipmjgogk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1366,16 +1428,16 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#sheudhhfxy .gt_first_summary_row {
+#jfipmjgogk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_first_summary_row.thick {
+#jfipmjgogk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sheudhhfxy .gt_last_summary_row {
+#jfipmjgogk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1385,7 +1447,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_grand_summary_row {
+#jfipmjgogk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1395,7 +1457,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#sheudhhfxy .gt_first_grand_summary_row {
+#jfipmjgogk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1405,7 +1467,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-top-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_last_grand_summary_row_top {
+#jfipmjgogk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1415,11 +1477,11 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_striped {
+#jfipmjgogk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sheudhhfxy .gt_table_body {
+#jfipmjgogk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1428,7 +1490,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-bottom-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_footnotes {
+#jfipmjgogk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1442,7 +1504,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_footnote {
+#jfipmjgogk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1451,7 +1513,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#sheudhhfxy .gt_sourcenotes {
+#jfipmjgogk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1465,7 +1527,7 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   border-right-color: #D3D3D3;
 }
 
-#sheudhhfxy .gt_sourcenote {
+#jfipmjgogk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1473,72 +1535,72 @@ Table&nbsp;2: Netflix Catalog Size and Total Runtime Across Reporting Periods
   padding-right: 5px;
 }
 
-#sheudhhfxy .gt_left {
+#jfipmjgogk .gt_left {
   text-align: left;
 }
 
-#sheudhhfxy .gt_center {
+#jfipmjgogk .gt_center {
   text-align: center;
 }
 
-#sheudhhfxy .gt_right {
+#jfipmjgogk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sheudhhfxy .gt_font_normal {
+#jfipmjgogk .gt_font_normal {
   font-weight: normal;
 }
 
-#sheudhhfxy .gt_font_bold {
+#jfipmjgogk .gt_font_bold {
   font-weight: bold;
 }
 
-#sheudhhfxy .gt_font_italic {
+#jfipmjgogk .gt_font_italic {
   font-style: italic;
 }
 
-#sheudhhfxy .gt_super {
+#jfipmjgogk .gt_super {
   font-size: 65%;
 }
 
-#sheudhhfxy .gt_footnote_marks {
+#jfipmjgogk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sheudhhfxy .gt_asterisk {
+#jfipmjgogk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sheudhhfxy .gt_indent_1 {
+#jfipmjgogk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sheudhhfxy .gt_indent_2 {
+#jfipmjgogk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sheudhhfxy .gt_indent_3 {
+#jfipmjgogk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sheudhhfxy .gt_indent_4 {
+#jfipmjgogk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sheudhhfxy .gt_indent_5 {
+#jfipmjgogk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sheudhhfxy .katex-display {
+#jfipmjgogk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sheudhhfxy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jfipmjgogk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1624,23 +1686,23 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
 </figcaption>
 <div aria-describedby="tbl-consistent-staples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fujyqcswhn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fujyqcswhn table {
+<div id="afjzkkfnam" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#afjzkkfnam table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fujyqcswhn thead, #fujyqcswhn tbody, #fujyqcswhn tfoot, #fujyqcswhn tr, #fujyqcswhn td, #fujyqcswhn th {
+#afjzkkfnam thead, #afjzkkfnam tbody, #afjzkkfnam tfoot, #afjzkkfnam tr, #afjzkkfnam td, #afjzkkfnam th {
   border-style: none;
 }
 
-#fujyqcswhn p {
+#afjzkkfnam p {
   margin: 0;
   padding: 0;
 }
 
-#fujyqcswhn .gt_table {
+#afjzkkfnam .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1666,12 +1728,12 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-left-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_caption {
+#afjzkkfnam .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fujyqcswhn .gt_title {
+#afjzkkfnam .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1683,7 +1745,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-width: 0;
 }
 
-#fujyqcswhn .gt_subtitle {
+#afjzkkfnam .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1695,7 +1757,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-top-width: 0;
 }
 
-#fujyqcswhn .gt_heading {
+#afjzkkfnam .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1707,13 +1769,13 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_bottom_border {
+#afjzkkfnam .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_col_headings {
+#afjzkkfnam .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1728,7 +1790,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_col_heading {
+#afjzkkfnam .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1748,7 +1810,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   overflow-x: hidden;
 }
 
-#fujyqcswhn .gt_column_spanner_outer {
+#afjzkkfnam .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1760,15 +1822,15 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 4px;
 }
 
-#fujyqcswhn .gt_column_spanner_outer:first-child {
+#afjzkkfnam .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fujyqcswhn .gt_column_spanner_outer:last-child {
+#afjzkkfnam .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fujyqcswhn .gt_column_spanner {
+#afjzkkfnam .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1780,11 +1842,11 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   width: 100%;
 }
 
-#fujyqcswhn .gt_spanner_row {
+#afjzkkfnam .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fujyqcswhn .gt_group_heading {
+#afjzkkfnam .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1810,7 +1872,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   text-align: left;
 }
 
-#fujyqcswhn .gt_empty_group_heading {
+#afjzkkfnam .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1825,15 +1887,15 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   vertical-align: middle;
 }
 
-#fujyqcswhn .gt_from_md > :first-child {
+#afjzkkfnam .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fujyqcswhn .gt_from_md > :last-child {
+#afjzkkfnam .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fujyqcswhn .gt_row {
+#afjzkkfnam .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1852,7 +1914,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   overflow-x: hidden;
 }
 
-#fujyqcswhn .gt_stub {
+#afjzkkfnam .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1865,7 +1927,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#fujyqcswhn .gt_stub_row_group {
+#afjzkkfnam .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1879,15 +1941,15 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   vertical-align: top;
 }
 
-#fujyqcswhn .gt_row_group_first td {
+#afjzkkfnam .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fujyqcswhn .gt_row_group_first th {
+#afjzkkfnam .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fujyqcswhn .gt_summary_row {
+#afjzkkfnam .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1897,16 +1959,16 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#fujyqcswhn .gt_first_summary_row {
+#afjzkkfnam .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_first_summary_row.thick {
+#afjzkkfnam .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fujyqcswhn .gt_last_summary_row {
+#afjzkkfnam .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1916,7 +1978,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_grand_summary_row {
+#afjzkkfnam .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1926,7 +1988,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#fujyqcswhn .gt_first_grand_summary_row {
+#afjzkkfnam .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1936,7 +1998,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-top-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_last_grand_summary_row_top {
+#afjzkkfnam .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1946,11 +2008,11 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_striped {
+#afjzkkfnam .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fujyqcswhn .gt_table_body {
+#afjzkkfnam .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1959,7 +2021,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-bottom-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_footnotes {
+#afjzkkfnam .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1973,7 +2035,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_footnote {
+#afjzkkfnam .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1982,7 +2044,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#fujyqcswhn .gt_sourcenotes {
+#afjzkkfnam .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1996,7 +2058,7 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   border-right-color: #D3D3D3;
 }
 
-#fujyqcswhn .gt_sourcenote {
+#afjzkkfnam .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2004,72 +2066,72 @@ Table&nbsp;3: Top Consistent ‘Staple’ Titles Across Multiple Periods
   padding-right: 5px;
 }
 
-#fujyqcswhn .gt_left {
+#afjzkkfnam .gt_left {
   text-align: left;
 }
 
-#fujyqcswhn .gt_center {
+#afjzkkfnam .gt_center {
   text-align: center;
 }
 
-#fujyqcswhn .gt_right {
+#afjzkkfnam .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fujyqcswhn .gt_font_normal {
+#afjzkkfnam .gt_font_normal {
   font-weight: normal;
 }
 
-#fujyqcswhn .gt_font_bold {
+#afjzkkfnam .gt_font_bold {
   font-weight: bold;
 }
 
-#fujyqcswhn .gt_font_italic {
+#afjzkkfnam .gt_font_italic {
   font-style: italic;
 }
 
-#fujyqcswhn .gt_super {
+#afjzkkfnam .gt_super {
   font-size: 65%;
 }
 
-#fujyqcswhn .gt_footnote_marks {
+#afjzkkfnam .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fujyqcswhn .gt_asterisk {
+#afjzkkfnam .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fujyqcswhn .gt_indent_1 {
+#afjzkkfnam .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fujyqcswhn .gt_indent_2 {
+#afjzkkfnam .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fujyqcswhn .gt_indent_3 {
+#afjzkkfnam .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fujyqcswhn .gt_indent_4 {
+#afjzkkfnam .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fujyqcswhn .gt_indent_5 {
+#afjzkkfnam .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fujyqcswhn .katex-display {
+#afjzkkfnam .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fujyqcswhn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#afjzkkfnam div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2141,23 +2203,23 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
 </figcaption>
 <div aria-describedby="tbl-shows-vs-movies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="kqvodnrcrr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kqvodnrcrr table {
+<div id="zaumiliunt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zaumiliunt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kqvodnrcrr thead, #kqvodnrcrr tbody, #kqvodnrcrr tfoot, #kqvodnrcrr tr, #kqvodnrcrr td, #kqvodnrcrr th {
+#zaumiliunt thead, #zaumiliunt tbody, #zaumiliunt tfoot, #zaumiliunt tr, #zaumiliunt td, #zaumiliunt th {
   border-style: none;
 }
 
-#kqvodnrcrr p {
+#zaumiliunt p {
   margin: 0;
   padding: 0;
 }
 
-#kqvodnrcrr .gt_table {
+#zaumiliunt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2183,12 +2245,12 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-left-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_caption {
+#zaumiliunt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kqvodnrcrr .gt_title {
+#zaumiliunt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2200,7 +2262,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-width: 0;
 }
 
-#kqvodnrcrr .gt_subtitle {
+#zaumiliunt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2212,7 +2274,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-top-width: 0;
 }
 
-#kqvodnrcrr .gt_heading {
+#zaumiliunt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2224,13 +2286,13 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_bottom_border {
+#zaumiliunt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_col_headings {
+#zaumiliunt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2245,7 +2307,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_col_heading {
+#zaumiliunt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2265,7 +2327,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   overflow-x: hidden;
 }
 
-#kqvodnrcrr .gt_column_spanner_outer {
+#zaumiliunt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2277,15 +2339,15 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 4px;
 }
 
-#kqvodnrcrr .gt_column_spanner_outer:first-child {
+#zaumiliunt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kqvodnrcrr .gt_column_spanner_outer:last-child {
+#zaumiliunt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kqvodnrcrr .gt_column_spanner {
+#zaumiliunt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2297,11 +2359,11 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   width: 100%;
 }
 
-#kqvodnrcrr .gt_spanner_row {
+#zaumiliunt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kqvodnrcrr .gt_group_heading {
+#zaumiliunt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2327,7 +2389,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   text-align: left;
 }
 
-#kqvodnrcrr .gt_empty_group_heading {
+#zaumiliunt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2342,15 +2404,15 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   vertical-align: middle;
 }
 
-#kqvodnrcrr .gt_from_md > :first-child {
+#zaumiliunt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kqvodnrcrr .gt_from_md > :last-child {
+#zaumiliunt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kqvodnrcrr .gt_row {
+#zaumiliunt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2369,7 +2431,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   overflow-x: hidden;
 }
 
-#kqvodnrcrr .gt_stub {
+#zaumiliunt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2382,7 +2444,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#kqvodnrcrr .gt_stub_row_group {
+#zaumiliunt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2396,15 +2458,15 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   vertical-align: top;
 }
 
-#kqvodnrcrr .gt_row_group_first td {
+#zaumiliunt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kqvodnrcrr .gt_row_group_first th {
+#zaumiliunt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kqvodnrcrr .gt_summary_row {
+#zaumiliunt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2414,16 +2476,16 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#kqvodnrcrr .gt_first_summary_row {
+#zaumiliunt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_first_summary_row.thick {
+#zaumiliunt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kqvodnrcrr .gt_last_summary_row {
+#zaumiliunt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2433,7 +2495,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_grand_summary_row {
+#zaumiliunt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2443,7 +2505,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#kqvodnrcrr .gt_first_grand_summary_row {
+#zaumiliunt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2453,7 +2515,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-top-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_last_grand_summary_row_top {
+#zaumiliunt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2463,11 +2525,11 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_striped {
+#zaumiliunt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kqvodnrcrr .gt_table_body {
+#zaumiliunt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2476,7 +2538,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-bottom-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_footnotes {
+#zaumiliunt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2490,7 +2552,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_footnote {
+#zaumiliunt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2499,7 +2561,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#kqvodnrcrr .gt_sourcenotes {
+#zaumiliunt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2513,7 +2575,7 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   border-right-color: #D3D3D3;
 }
 
-#kqvodnrcrr .gt_sourcenote {
+#zaumiliunt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2521,72 +2583,72 @@ Table&nbsp;4: Fraction of Watch Time: Shows vs.&nbsp;Movies
   padding-right: 5px;
 }
 
-#kqvodnrcrr .gt_left {
+#zaumiliunt .gt_left {
   text-align: left;
 }
 
-#kqvodnrcrr .gt_center {
+#zaumiliunt .gt_center {
   text-align: center;
 }
 
-#kqvodnrcrr .gt_right {
+#zaumiliunt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kqvodnrcrr .gt_font_normal {
+#zaumiliunt .gt_font_normal {
   font-weight: normal;
 }
 
-#kqvodnrcrr .gt_font_bold {
+#zaumiliunt .gt_font_bold {
   font-weight: bold;
 }
 
-#kqvodnrcrr .gt_font_italic {
+#zaumiliunt .gt_font_italic {
   font-style: italic;
 }
 
-#kqvodnrcrr .gt_super {
+#zaumiliunt .gt_super {
   font-size: 65%;
 }
 
-#kqvodnrcrr .gt_footnote_marks {
+#zaumiliunt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kqvodnrcrr .gt_asterisk {
+#zaumiliunt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kqvodnrcrr .gt_indent_1 {
+#zaumiliunt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kqvodnrcrr .gt_indent_2 {
+#zaumiliunt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kqvodnrcrr .gt_indent_3 {
+#zaumiliunt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kqvodnrcrr .gt_indent_4 {
+#zaumiliunt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kqvodnrcrr .gt_indent_5 {
+#zaumiliunt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kqvodnrcrr .katex-display {
+#zaumiliunt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kqvodnrcrr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zaumiliunt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2669,23 +2731,23 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
 </figcaption>
 <div aria-describedby="tbl-live-vs-taped-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="fzgzxwrjsv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fzgzxwrjsv table {
+<div id="fabaawacan" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fabaawacan table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fzgzxwrjsv thead, #fzgzxwrjsv tbody, #fzgzxwrjsv tfoot, #fzgzxwrjsv tr, #fzgzxwrjsv td, #fzgzxwrjsv th {
+#fabaawacan thead, #fabaawacan tbody, #fabaawacan tfoot, #fabaawacan tr, #fabaawacan td, #fabaawacan th {
   border-style: none;
 }
 
-#fzgzxwrjsv p {
+#fabaawacan p {
   margin: 0;
   padding: 0;
 }
 
-#fzgzxwrjsv .gt_table {
+#fabaawacan .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2711,12 +2773,12 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-left-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_caption {
+#fabaawacan .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fzgzxwrjsv .gt_title {
+#fabaawacan .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2728,7 +2790,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-width: 0;
 }
 
-#fzgzxwrjsv .gt_subtitle {
+#fabaawacan .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2740,7 +2802,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-top-width: 0;
 }
 
-#fzgzxwrjsv .gt_heading {
+#fabaawacan .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2752,13 +2814,13 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_bottom_border {
+#fabaawacan .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_col_headings {
+#fabaawacan .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2773,7 +2835,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_col_heading {
+#fabaawacan .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2793,7 +2855,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   overflow-x: hidden;
 }
 
-#fzgzxwrjsv .gt_column_spanner_outer {
+#fabaawacan .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2805,15 +2867,15 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 4px;
 }
 
-#fzgzxwrjsv .gt_column_spanner_outer:first-child {
+#fabaawacan .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fzgzxwrjsv .gt_column_spanner_outer:last-child {
+#fabaawacan .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fzgzxwrjsv .gt_column_spanner {
+#fabaawacan .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2825,11 +2887,11 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   width: 100%;
 }
 
-#fzgzxwrjsv .gt_spanner_row {
+#fabaawacan .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fzgzxwrjsv .gt_group_heading {
+#fabaawacan .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2855,7 +2917,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   text-align: left;
 }
 
-#fzgzxwrjsv .gt_empty_group_heading {
+#fabaawacan .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2870,15 +2932,15 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   vertical-align: middle;
 }
 
-#fzgzxwrjsv .gt_from_md > :first-child {
+#fabaawacan .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fzgzxwrjsv .gt_from_md > :last-child {
+#fabaawacan .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fzgzxwrjsv .gt_row {
+#fabaawacan .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2897,7 +2959,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   overflow-x: hidden;
 }
 
-#fzgzxwrjsv .gt_stub {
+#fabaawacan .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2910,7 +2972,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#fzgzxwrjsv .gt_stub_row_group {
+#fabaawacan .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2924,15 +2986,15 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   vertical-align: top;
 }
 
-#fzgzxwrjsv .gt_row_group_first td {
+#fabaawacan .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fzgzxwrjsv .gt_row_group_first th {
+#fabaawacan .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fzgzxwrjsv .gt_summary_row {
+#fabaawacan .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2942,16 +3004,16 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#fzgzxwrjsv .gt_first_summary_row {
+#fabaawacan .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_first_summary_row.thick {
+#fabaawacan .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fzgzxwrjsv .gt_last_summary_row {
+#fabaawacan .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2961,7 +3023,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_grand_summary_row {
+#fabaawacan .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2971,7 +3033,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#fzgzxwrjsv .gt_first_grand_summary_row {
+#fabaawacan .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2981,7 +3043,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-top-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_last_grand_summary_row_top {
+#fabaawacan .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2991,11 +3053,11 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_striped {
+#fabaawacan .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fzgzxwrjsv .gt_table_body {
+#fabaawacan .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3004,7 +3066,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-bottom-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_footnotes {
+#fabaawacan .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3018,7 +3080,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_footnote {
+#fabaawacan .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3027,7 +3089,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#fzgzxwrjsv .gt_sourcenotes {
+#fabaawacan .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3041,7 +3103,7 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   border-right-color: #D3D3D3;
 }
 
-#fzgzxwrjsv .gt_sourcenote {
+#fabaawacan .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3049,72 +3111,72 @@ Table&nbsp;5: Performance Comparison: Live Events vs.&nbsp;Pre-Taped Content
   padding-right: 5px;
 }
 
-#fzgzxwrjsv .gt_left {
+#fabaawacan .gt_left {
   text-align: left;
 }
 
-#fzgzxwrjsv .gt_center {
+#fabaawacan .gt_center {
   text-align: center;
 }
 
-#fzgzxwrjsv .gt_right {
+#fabaawacan .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fzgzxwrjsv .gt_font_normal {
+#fabaawacan .gt_font_normal {
   font-weight: normal;
 }
 
-#fzgzxwrjsv .gt_font_bold {
+#fabaawacan .gt_font_bold {
   font-weight: bold;
 }
 
-#fzgzxwrjsv .gt_font_italic {
+#fabaawacan .gt_font_italic {
   font-style: italic;
 }
 
-#fzgzxwrjsv .gt_super {
+#fabaawacan .gt_super {
   font-size: 65%;
 }
 
-#fzgzxwrjsv .gt_footnote_marks {
+#fabaawacan .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fzgzxwrjsv .gt_asterisk {
+#fabaawacan .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fzgzxwrjsv .gt_indent_1 {
+#fabaawacan .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fzgzxwrjsv .gt_indent_2 {
+#fabaawacan .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fzgzxwrjsv .gt_indent_3 {
+#fabaawacan .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fzgzxwrjsv .gt_indent_4 {
+#fabaawacan .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fzgzxwrjsv .gt_indent_5 {
+#fabaawacan .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fzgzxwrjsv .katex-display {
+#fabaawacan .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fzgzxwrjsv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fabaawacan div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

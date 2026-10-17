@@ -53,7 +53,8 @@ h2, h3, h4, h5, h6, h7 {
 #| label: task1-3-load-data
 #| message: false
 #| warning: false
-#| echo: false
+#| echo: true
+#| code-fold: true
 
 library(tidyverse)
 library(rvest)

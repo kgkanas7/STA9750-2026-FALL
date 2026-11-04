@@ -16,9 +16,9 @@ website:
       - text: "Mini-Projects"
         menu:
           - text: "Mini-Project #01: Netflix"
-            href: mp01.qmd
+            href: mp01.html
           - text: "Mini-Project #02: Green Transit"
-            href: mp02.qmd
+            href: mp02.html
     
 format:
   html:
